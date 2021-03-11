@@ -1,0 +1,64 @@
+
+body {
+	background: rgb(89, 89, 89);
+}
+
+
+h3 {
+	margin:0;
+	padding: .5rem;
+}
+
+
+h5 {
+	color:rgb(255,255,255,.7);
+	margin-top: 2rem;
+}
+
+.container {
+	margin:0;
+	max-width: 100%;
+}
+
+#head_row {
+	background: white;
+}
+
+nav {
+	display: none;
+}
+
+#src_pg {
+	display: none;
+}
+
+.sect-div article {
+	border:1px solid rgb(0, 0, 0,.3);
+	border-radius: 3.5px;
+	margin:.6rem .5rem;
+	padding:.3rem;
+	background:	rgb(255, 255, 255,.1);
+}
+
+.sect-div p{
+	color:rgb(255, 255, 255,.5);
+	margin:0;
+}
+
+.sect-div h6 {
+	color:rgb(217, 217, 217,.8);
+	font-weight: bold;
+}
+
+#wlist article {
+	border:1px solid rgb(153, 153, 153,.6);
+	border-radius: 5px;
+	margin:.6rem .5rem;
+	padding:.3rem;
+	background: rgb(0, 0, 0,.3)
+}
+
+#wlist p{
+	color:rgb(255, 255, 255,.6);
+	margin:0;
+}
