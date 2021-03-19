@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html lang="fr" style="height:100%">
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>LESITE Projet WEB</title>
+	<title>LESITE Connexion</title>
 
 	<!--Scripts css-->
 	<link rel="stylesheet" href="./assets/vendors/bootstrap/bootstrap-4.5.3-dist/css/bootstrap.min.css">
@@ -14,116 +14,69 @@
 
 </head>
 
-
-<body class="container">
+<body class="container" style="height:100%">
 	<!--Entete de l'accueuil avec un hamburger et le bouton rechercher pour telephone-->
 
-	<div class="row" id="head_row">
-		<header class="col-sm-12 d-flex justify-content-between justify-content-md-center align-items-center justify-content-lg-center justify-content-md-center">
-			<i class="fas fa-bars h4 m-2 menu_ic phone"></i>
-			<h3><i class="fas fa-poll"></i> LESITE</h3>
-			<i class="fas fa-search h4 m-2 search_ic phone"></i>
-		</header>
-	</div>
+<div class="row" id="head_row">
+	<header class="col-sm-12 d-flex justify-content-between justify-content-md-center align-items-center justify-content-lg-center justify-content-md-center">
+		<i class="fas fa-bars h4 m-2 menu_ic phone"></i>
+		<h3 onclick="window.location.href = 'index.php';"><i class="fas fa-poll"></i> LESITE</h3>
+		<i class="fas fa-search h4 m-2 search_ic phone"></i>
+	</header>
+</div>
 
-	<div  id="search_ic2" class="ordi"><i class="fas fa-search"></i></div>
-	<!--Bloc navigation, avec le menu -->
-	<nav class="all-screen">
-		<i class="fas fa-chevron-left back_ic menu_ic phone"></i>
-		<h4 class="phone">MENU</h4>
-		<hr class="phone" style="background: white; width: 50%">
-		<ul>
-			<a href="connexion.html"><li>Connexion</li></a>
-			<a href="offre.html"><li>Offres (ou directement vià la recherche ?</li></a>
-			<a href="gestion.html"><li>Gestion comptes (global ?) (quand connecté)</li></a>
-			<a href="wihslist.html"><li>Wish-List</li></a>
-			<a href="candidature.html"><li>Candidature</li></a>
-			<a href="connexion.html"><li>Compte (à mettre à connexion quand connecté)</li></a>
-			<a href="deconnexion.html" id="discret"><li>Deconnexion</li></a>
-		</ul>
-		<hr class="ordi" style="background: white; width: 95%">
-	</nav>
+<div  id="search_ic2" class="ordi"><i class="fas fa-search"></i></div>
+
+<!--Bloc navigation, avec le menu -->
+<nav class="all-screen">
+	<i class="fas fa-chevron-left back_ic menu_ic phone"></i>
+	<h4 class="phone">MENU</h4>
+	<hr class="phone" style="background: white; width: 50%">
+	<ul>
+		<a href="connexion.html"><li>Connexion</li></a>
+		<a href="#"><li>Offres</li></a>
+		<a href="gestion.html"><li>Gestion comptes (quand connecté)</li></a>
+		<a href="wihslist.html"><li>Wish-List</li></a>
+		<a href="candidature.html"><li>Candidature</li></a>
+		<a href="connexion.html"><li>Compte (à mettre à connexion quand connecté)</li></a>
+		<a href="deconnexion.html" id="discret"><li>Deconnexion</li></a>
+	</ul>
+	<hr class="ordi" style="background: white; width: 95%">
+</nav>
 
 
+	
 
-	<!--Partie principale, avec les dernières nouveautés et la wish-list-->
-	<main>
+<main>
 
-		<!--Nouveaux stages-->
-		<section class="sect-div">
-			<h5>Dernières offres de stage</h5>
-			<div class="disp_offre">
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage PARIS</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
+		<!-- Connexion -->
+		<h5>Se connecter à mon espace</h5>
+		<section id="sect_conn">
 
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage NANCY</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API. BLALALALALALANB AABfBBSDHALZFIHAIFHZIELFGAGBZV</p>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage METZ</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage MARSEILLE</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage STRASBOURG</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
-
-				<article class="d-flex justify-content-center align-items-center" onclick="window.location.href = 'connexion.html';">
-					<i style="font-size: 3rem; color:grey; cursor:pointer;" class="fas fa-long-arrow-alt-right"></i>
-				</article>
-			</div>
+			<form>
+				<div class="form-group">
+					<label for="input_id">Identifiant</label>
+					<input type="email" class="form-control" id="input_id" aria-describedby="emailHelp">
+					<small id="emailHelp" class="form-text text-muted">On ne partagera jamais vos identifiants avec qui que ce soit.</small>
+				</div>
+				<div class="form-group">
+					<label for="input-pswd">Mot de passe</label>
+					<input type="password" class="form-control" id="input-pswd">
+				</div>
+				<div class="form-group form-check">
+					<input type="checkbox" class="form-check-input" id="conn_alive">
+					<label class="form-check-label" for="conn_alive">Boutton rester connecter ?</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Connexion</button>
+				<button type="button" class="btn btn-outline-secondary float-right">Réinitialiser</button>
+			</form>
 
 		</section>
 
-
-		<!--La WISH-LIST-->
-		<section class="sect-div">
-			<hr class="phone" style="background:white">
-			<h5>WISH-LIST <i class="far fa-bookmark float-right"></i></h5>
-			<div id="wlist" class="disp_offre">
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage NANCY</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage REIMS</h6>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage VERDUN</h6>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage BREST</h6>
-				</article>
-
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage DIJON</h6>
-				</article>
-			</div>
-		</section>
 
 
 	<!--Bloc recherche, avec le form pour rechercher -->
-		<div class="all-screen" id="src_pg">
+				<div class="all-screen" id="src_pg">
 			<i class="fas fa-chevron-left back_ic search_ic phone"></i>
 			<h4>RECHERCHER</h4>
 			<form id="search_f">
@@ -199,6 +152,7 @@
 				<input type="reset" class="float-right" id="reset_btn" value="Réinitialiser">
 			</form>
 		</div>
+
 	</main>
 
 
@@ -211,7 +165,6 @@
 	<script src="./assets/vendors/jquery/jquery-3.5.1.min.js"></script>
 	<script src="./assets/vendors/bootstrap/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./assets/script.js"></script>
-
 
 </body>
 
