@@ -1,18 +1,19 @@
 
+
 body {
-	background: rgb(89, 89, 89);
+	background: rgb(77, 77, 77);
+	/*background:#808080;*/
 }
 
+.ordi {
+	display: none;
+}
+
+/*ENTETE*/
 
 h3 {
 	margin:0;
-	padding: .5rem;
-}
-
-
-h5 {
-	color:rgb(255,255,255,.7);
-	margin-top: 2rem;
+	padding: .4rem;
 }
 
 .container {
@@ -24,20 +25,30 @@ h5 {
 	background: white;
 }
 
-nav {
-	display: none;
+
+/*PARTIE PRINCIPALE DE LA PAGE D ACCUEIL*/
+
+
+h5 {
+	color:rgb(255,255,255,.7);
+	margin-top: 2rem;
 }
 
-#src_pg {
-	display: none;
+.sect-div h6 {
+	color:rgb(217, 217, 217,.8);
+	font-weight: bold;
 }
 
-.sect-div article {
+
+	/*NOUVEAUX STAGES*/
+
+.nvloffre {
 	border:1px solid rgb(0, 0, 0,.3);
 	border-radius: 3.5px;
-	margin:.6rem .5rem;
-	padding:.3rem;
+	margin:1rem .5rem;
+	padding:.7rem;
 	background:	rgb(255, 255, 255,.1);
+	overflow-wrap : break-word;
 }
 
 .sect-div p{
@@ -45,10 +56,8 @@ nav {
 	margin:0;
 }
 
-.sect-div h6 {
-	color:rgb(217, 217, 217,.8);
-	font-weight: bold;
-}
+
+	/*WISH LIST*/
 
 #wlist article {
 	border:1px solid rgb(153, 153, 153,.6);
@@ -61,4 +70,232 @@ nav {
 #wlist p{
 	color:rgb(255, 255, 255,.6);
 	margin:0;
+}
+
+
+
+
+
+
+/*PARTIE COMMUNE MENU ET RECHERCHE*/
+.all-screen {
+	display:none;
+	flex-direction: column;
+	align-items:center;
+	position:absolute;
+	background:grey;
+	top:0;
+	left:0;
+	height: 0px;
+	width:100%;
+	transition: .5s ease;
+	overflow-y:auto;
+	z-index: 999;
+}
+
+h4 {
+	color:rgb(255,255,255,.7);
+	font-size: 1.2rem;
+	padding: .6rem;
+	position: sticky;
+	top:5px;
+	z-index: 1000;
+}
+
+
+
+	/*PARTIE MENU*/
+
+nav ul {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	max-height: 90%;
+	min-width: 45%;
+	list-style: none;
+	padding: 1rem 0;
+}
+
+nav ul a {
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	font-size: 1.2rem;
+	padding: .7rem;
+	margin: 1rem;
+	width: 100%;
+	background: radial-gradient(ellipse closest-side, #737373, 20%, transparent);
+	border: 0 solid;
+	border-radius: 5px;
+}
+
+.back_ic {
+	color:white;
+	position:absolute;
+	top:1rem;
+	left:1.5rem;
+	font-size: 1.3rem;
+}
+
+
+	/*PARTIE RECHERCHE*/
+
+#src_pg form  {
+	width: 90%;
+	margin-bottom: 1rem;
+}
+
+#check_zone {
+	margin: 1rem;
+	background: rgb(255, 255, 255,.2);
+	padding: 5px;
+}
+
+.extra-s {
+	display: none;
+}
+
+.form-group {
+	margin: 1rem;
+}
+
+#cp_selec {
+	width: 50%;
+	margin-left: .5rem;
+}
+
+
+/*PARTIE CONNEXION*/
+
+#sect_conn label {
+	color: rgb(255, 255, 255,.7);
+}
+
+#sect_conn {
+	display: flex;
+	justify-content: center;
+}
+
+
+
+/*Telephone*/
+
+@media screen and (min-width: 768px) {
+	body {
+		background: rgb(77, 77, 77);
+		/*background:#808080;*/
+	}
+
+
+	h3 {
+		margin:0;
+		padding: 0.4rem;
+		font-size: 2.5rem; 
+		margin-top: 1.5rem;
+		cursor:pointer;
+	}
+
+	h4 {
+		margin-top: 2rem;
+	}
+
+	.ordi {
+		display: block;
+	}
+
+	.phone{
+		display: none;
+	}
+
+	#search_ic2 {
+		display: block;
+		position: absolute;
+		font-size: 2.5rem;
+		right: 4.5rem;
+		top:2rem;
+		cursor: pointer;
+	}
+
+	#head_row {
+		background: none;
+	}
+
+
+	.all-screen {
+		display: block;
+		height: auto;
+		background:none;
+		position: static;
+	}
+
+	nav ul {
+		display:flex;
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		max-height: 90%;
+		min-width: 10%;
+		list-style: none;
+		padding: 1rem 0;
+	}
+
+	nav ul a {
+		display: flex;
+		justify-content: center;
+		text-decoration: none;
+		color: white;
+		font-weight: normal;
+		font-size: 1rem;
+		padding: .5rem 1rem;
+		margin: 1rem;
+		width: auto;
+		background: #212529;
+		border-radius: 0;
+		transition:.3s ease;
+	}
+
+	nav ul a:hover{
+		transform:scale(1.05);
+		color: white;
+	}
+
+	#discret {
+		background:rgb(204, 0, 0,.3)
+	}
+
+	#discret:hover {
+		background:rgb(204, 0, 0);
+	}
+
+	.nvloffre{
+		overflow-wrap: break-word;
+		cursor: pointer;
+		transition:.3s ease;
+	}
+
+	.nvloffre:hover{
+		transform: scale(1.03);
+
+	}
+
+	.disp_offre {
+		display: grid;
+		grid-template-columns: 30% 30% 30%;
+		justify-content: space-around;
+
+	}
+
+	#sect_conn {
+		justify-content: center;
+	}
+
+	#sect_conn form {
+		border: 1px solid grey;
+		padding: 0 1rem 1rem 1rem;
+		width:50%;
+		min-width: 500px;
+	}
 }
