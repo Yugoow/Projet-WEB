@@ -5,7 +5,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>LESITE Projet WEB</title>
+	<title>LESITE Gestion</title>
 
 	<!--Scripts css-->
 	<link rel="stylesheet" href="./assets/vendors/bootstrap/bootstrap-4.5.3-dist/css/bootstrap.min.css">
@@ -49,78 +49,120 @@
 	<!--Partie principale, avec les dernières nouveautés et la wish-list-->
 	<main>
 
-		<!--Nouveaux stages-->
-		<section class="sect-div">
-			<h5>Dernières offres de stage</h5>
-			<div class="disp_offre">
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage PARIS</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
+<section>
+	<h5>Gestion</h5>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="utilisateur-tab" data-toggle="tab" href="#utilisateur" role="tab" aria-controls="utilisateur" aria-selected="true">Utilisateurs</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Offres</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false">Entreprises</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="utilisateur" role="tabpanel" aria-labelledby="utilisateur-tab">
+			<form>
 
-				</article>
+				<section class="form-group p-2 m-0">
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="opt1" id="option_1" type="radio" name="opt" checked>
+						<label class="custom-control-label" for="option_1"><strong>Creation</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="opt2" id="option_2" type="radio" name="opt">
+						<label class="custom-control-label" for="option_2"><strong>Suppression</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="opt3" id="option_3" type="radio" name="opt">
+						<label class="custom-control-label" for="option_3"><strong>Modification</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="opt4" id="option_4" type="radio" name="opt">
+						<label class="custom-control-label" for="option_4"><strong>Autre</strong></label>
+					</div>
+				</section>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage NANCY</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API. BLALALALALALANB AABfBBSDHALZFIHAIFHZIELFGAGBZV</p>
-				</article>
+				<section>
+					<h6 class="p-2">Creation</h6>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage METZ</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
+					<div class="form-group">
+						<label for="inpput_email">Email address</label>
+						<input type="email" class="form-control" id="inpput_email" placeholder="name@example.com" required>
+					</div>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage MARSEILLE</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
+					<div class="form-group">
+						<label for="promotion_selec">Promotion</label>
+						<select class="form-control" id="promotion_selec">
+							<option>A1</option>
+							<option>A1</option>
+							<option>A3</option>
+							<option>A4</option>
+							<option>A5</option>
+						</select>
+					</div>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage STRASBOURG</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
+					<div class="form-group">
+						<label for="input_centre">Centre</label>
+						<input type="text" class="form-control" id="input_centre" required>			
+					</div>
 
-				<article class="d-flex justify-content-center align-items-center" onclick="window.location.href = 'connexion.html';">
-					<i style="font-size: 3rem; color:grey; cursor:pointer;" class="fas fa-long-arrow-alt-right"></i>
-				</article>
-			</div>
-
-		</section>
+					<button type="button" class="btn btn-outline-secondary m-2">Réinitialiser</button>
+					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+				</section>
 
 
-		<!--La WISH-LIST-->
-		<section class="sect-div">
-			<hr class="phone" style="background:white">
-			<h5>WISH-LIST <i class="far fa-bookmark float-right"></i></h5>
-			<div id="wlist" class="disp_offre">
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage NANCY</h6>
-					<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-					<p>Gestion d'une BDD reliéeà des API</p>
-				</article>
+			</form>
+		</div>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage REIMS</h6>
-				</article>
+		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+			<form>
+				<h6 class="p-2">Creation</h6>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage VERDUN</h6>
-				</article>
+				<div class="form-group">
+					<label for="input_entreprise">Entreprise</label>
+					<input type="text" class="form-control" id="input_entreprise" required>			
+				</div>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage BREST</h6>
-				</article>
+				<div class="form-group">
+					<label for="promotion_selec">Promotion</label>
+					<select class="form-control" id="promotion_selec">
+						<option>A1</option>
+						<option>A1</option>
+						<option>A3</option>
+						<option>A4</option>
+						<option>A5</option>
+					</select>
+				</div>
 
-				<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-					<h6>Stage DIJON</h6>
-				</article>
-			</div>
-		</section>
+				<div class="form-group">
+					<label for="duree_rng">Durée</label>
+					<input type="range" class="custom-range" id="duree_rng" required>
+				</div>
 
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Description</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description de l'offre" required></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="input_localisation">Localisation</label>
+					<input type="text" class="form-control" id="input_localisation" required>			
+				</div>
+
+				<button type="button" class="btn btn-outline-secondary m-2">Réinitialiser</button>
+				<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+
+			</form>
+		</div>
+
+		<div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
+			<h6>Bonjour entreprise</h6>
+		</div>
+	</div>
+</section>
 
 	<!--Bloc recherche, avec le form pour rechercher -->
 		<div class="all-screen" id="src_pg">
