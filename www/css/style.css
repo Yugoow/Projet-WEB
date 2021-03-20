@@ -123,9 +123,9 @@ nav ul a {
 	color: white;
 	font-weight: bold;
 	font-size: 1.2rem;
+	text-align: center;
 	padding: .7rem;
-	margin: 1rem;
-	width: 100%;
+	margin:.3rem 0;
 	background: radial-gradient(ellipse closest-side, #737373, 20%, transparent);
 	border: 0 solid;
 	border-radius: 5px;
@@ -179,6 +179,14 @@ nav ul a {
 }
 
 
+/*PARTIE GESTION*/
+.nav-tabs a {
+	color: white;
+}
+
+.tab-pane {
+	background: white;
+}
 
 /*Telephone*/
 
