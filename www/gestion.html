@@ -64,52 +64,93 @@
 	</ul>
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active" id="utilisateur" role="tabpanel" aria-labelledby="utilisateur-tab">
-			<form>
+			<form id="bloc-utilisateur" class="container" method="POST">
 
 				<section class="form-group p-2 m-0">
 					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="opt1" id="option_1" type="radio" name="opt" checked>
-						<label class="custom-control-label" for="option_1"><strong>Creation</strong></label>
+						<input class="custom-control-input" value="crea_user" id="user_opt_crea" type="radio" name="action_user" checked>
+						<label class="custom-control-label" for="user_opt_crea"><strong>Creation</strong></label>
 					</div>
 					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="opt2" id="option_2" type="radio" name="opt">
-						<label class="custom-control-label" for="option_2"><strong>Suppression</strong></label>
+						<input class="custom-control-input" value="supp_user" id="user_opt_supp" type="radio" name="action_user">
+						<label class="custom-control-label" for="user_opt_supp"><strong>Suppression</strong></label>
 					</div>
 					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="opt3" id="option_3" type="radio" name="opt">
-						<label class="custom-control-label" for="option_3"><strong>Modification</strong></label>
+						<input class="custom-control-input" value="modif_user" id="user_opt_modif" type="radio" name="action_user">
+						<label class="custom-control-label" for="user_opt_modif"><strong>Modification</strong></label>
 					</div>
 					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="opt4" id="option_4" type="radio" name="opt">
-						<label class="custom-control-label" for="option_4"><strong>Autre</strong></label>
+						<input class="custom-control-input" value="autre_user" id="user_opt_autre" type="radio" name="action_user">
+						<label class="custom-control-label" for="user_opt_autre"><strong>Autre</strong></label>
 					</div>
 				</section>
 
-				<section>
-					<h6 class="p-2">Creation</h6>
+				<section id="input-bloc-utilsateur">
+					<div class="row">
+						<div class="form-group col-lg col-md">
+							<label for="input_lastn">Nom</label>
+							<input type="text" class="form-control" id="input_lastn" placeholder="Nom" name="lastn" required>
+						</div>
 
-					<div class="form-group">
-						<label for="inpput_email">Email address</label>
-						<input type="email" class="form-control" id="inpput_email" placeholder="name@example.com" required>
+						<div class="form-group col-lg col-md">
+							<label for="input_firstn">Prénom</label>
+							<input type="text" class="form-control" id="input_firstn" placeholder="Prénom" name="firstn" required>
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="promotion_selec">Promotion</label>
+							<select class="form-control" id="promotion_selec" name="promo">
+								<option>A1</option>
+								<option>A1</option>
+								<option>A3</option>
+								<option>A4</option>
+								<option>A5</option>
+							</select>
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="promotion_selec">Promotion</label>
-						<select class="form-control" id="promotion_selec">
-							<option>A1</option>
-							<option>A1</option>
-							<option>A3</option>
-							<option>A4</option>
-							<option>A5</option>
-						</select>
+					<div class="row">
+						<div class="form-group col-lg col-md">
+							<label for="input_centre">Centre</label>
+							<input type="text" class="form-control" id="input_centre" name="centre" required>			
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="role_selec">Role</label>
+							<select class="form-control" id="role_selec" name="role" required>
+								<option>Étudiant</option>
+								<option>Délégué</option>
+								<option>Tuteur</option>
+								<option>Administrateur</option>
+							</select>
+							<p>Personnaliser les droits (délégués)</p>
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="input_centre">Centre</label>
-						<input type="text" class="form-control" id="input_centre" required>			
-					</div>
 
-					<button type="button" class="btn btn-outline-secondary m-2">Réinitialiser</button>
+					<div class="form-group">
+						<label for="input_email">Adresse email</label>
+						<input type="email" class="form-control" id="input_email" placeholder="nom@example.com" value="test@mail.com" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="input_mdp">Mot de passe</label>
+						<input type="password" class="form-control" id="input_mdp" placeholder="8 charactères minimum" pattern=".{8,30}" name="mdp" required>
+						<div class="d-flex justify-content-center align-items-center p-1">
+							<label for="mdp_rng">Taille</label>
+							<input type="range" class="ml-2 mr-2" id="mdp_rng" value ="8" max="30" min="8" step="1" required>
+							<input type="number" id="input_size" value="8" style="width:30px;">
+						</div>
+						<div class="d-flex justify-content-center">
+							<i class="fas fa-eye-slash m-3" id="hide_mdp"> Cacher</i>
+							<i class="fas fa-eye m-3" id="show_mdp" style="display:none;"> Afficher</i>
+							<i class="fas fa-sync-alt m-3" onclick="$('#input_mdp').val(generate($('#mdp_rng').val())).attr('type','text');$('#hide_mdp').show();$('#show_mdp').hide();"> Générer</i>
+						</div>
+
+					</div>
+		
+					<hr />
+
+					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
 					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
 				</section>
 
@@ -118,48 +159,146 @@
 		</div>
 
 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-			<form>
-				<h6 class="p-2">Creation</h6>
+			<form id="bloc_offre" class="container">
+				<section class="form-group p-2 m-0">
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="crea-offre" id="offre_opt_crea" type="radio" name="action_offre" checked>
+						<label class="custom-control-label" for="offre_opt_crea"><strong>Creation</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="supp-offre" id="offre_opt_supp" type="radio" name="action_offre">
+						<label class="custom-control-label" for="offre_opt_supp"><strong>Suppression</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="modif-offre" id="offre_opt_modif" type="radio" name="action_offre">
+						<label class="custom-control-label" for="offre_opt_modif"><strong>Modification</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="autre-offre" id="offre_opt_autre" type="radio" name="action_offre">
+						<label class="custom-control-label" for="offre_opt_autre"><strong>Autre</strong></label>
+					</div>
+				</section>
 
-				<div class="form-group">
-					<label for="input_entreprise">Entreprise</label>
-					<input type="text" class="form-control" id="input_entreprise" required>			
-				</div>
+				<section id="input-bloc-offre">
+					<div class="row">
 
-				<div class="form-group">
-					<label for="promotion_selec">Promotion</label>
-					<select class="form-control" id="promotion_selec">
-						<option>A1</option>
-						<option>A1</option>
-						<option>A3</option>
-						<option>A4</option>
-						<option>A5</option>
-					</select>
-				</div>
+						<div class="form-group col-lg col-md">
+							<label for="input_entreprise">Entreprise</label>
+							<input type="text" class="form-control" id="input_entreprise" name="nom_e" required>			
+						</div>
 
-				<div class="form-group">
-					<label for="duree_rng">Durée</label>
-					<input type="range" class="custom-range" id="duree_rng" required>
-				</div>
+						<div class="form-group col-lg col-md">
+							<label for="promotion_selec_o">Promotion</label>
+							<select class="form-control" id="promotion_selec_o" name="promo">
+								<option>A1</option>
+								<option>A1</option>
+								<option>A3</option>
+								<option>A4</option>
+								<option>A5</option>
+							</select>
+						</div>
 
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">Description</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description de l'offre" required></textarea>
-				</div>
+						<div class="form-group col-lg col-md">
+							<p class="mb-2">Places</p>
+							<div class="d-flex align-items-center">
+								<label for="input_placetot">Total:</label>
+								<input type="number" class="form-control w-25 m-3" id="input_placetot" pattern=".{1,}" name="p_tot" required>
+								<label for="input_placerest">Restant:</label>
+								<input type="number" class="form-control w-25 m-3" id="input_placerest" pattern=".{1,}" name="p_left" required>
+							</div>			
+						</div>
+					</div>
 
-				<div class="form-group">
-					<label for="input_localisation">Localisation</label>
-					<input type="text" class="form-control" id="input_localisation" required>			
-				</div>
+					<div class="row">
+						<div class="form-group col-lg col-md">
+							<label for="input_datestart">Date de début de stage</label>
+							<input type="date" class="form-control" id="input_datestart" placeholder="Début" name="debut" required>
+						</div>
 
-				<button type="button" class="btn btn-outline-secondary m-2">Réinitialiser</button>
-				<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+						<div class="form-group col-lg col-md">
+							<label for="duree_rng">Durée</label>
+							<input type="range" class="custom-range" id="duree_rng" name="duree" required>
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_competences">Compétences requises (description ?)</label>
+							<input type="text" class="form-control" id="input_competences" name="comptences" required>
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_gratif">Gratification</label>
+							<div class="input-group-append">
+								<input type="number" class="form-control" id="input_gratif" name="gratif" aria-label="Euro, avec séparation par virgule">
+								<span class="input-group-text">€</span>
+							</div>
+						</div>
+					</div>
+					<hr/>
+
+					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
+					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+				</section>
 
 			</form>
 		</div>
 
 		<div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
-			<h6>Bonjour entreprise</h6>
+			<form id="bloc_entreprise" class="container">
+				<section class="form-group p-2 m-0">
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="crea_e" id="e_opt_crea" type="radio" name="action_entreprise" checked>
+						<label class="custom-control-label" for="e_opt_crea"><strong>Creation</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="supp_e" id="e_opt_supp" type="radio" name="action_entreprise">
+						<label class="custom-control-label" for="e_opt_supp"><strong>Suppression</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="modif_e" id="e_opt_modif" type="radio" name="action_entreprise">
+						<label class="custom-control-label" for="e_opt_modif"><strong>Modification</strong></label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input class="custom-control-input" value="autre_e" id="e_opt_autre" type="radio" name="action_entreprise">
+						<label class="custom-control-label" for="e_opt_autre"><strong>Autre</strong></label>
+					</div>
+				</section>
+
+				<section id="input-bloc-entreprise">
+					<div class="row">
+
+						<div class="form-group col-lg col-md">
+							<label for="input_nom_e">Nom</label>
+							<input type="text" class="form-control" id="input_nom_e" placeholder="Nom" name="nom_e" required>
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_sect_e">Secteur d'activité</label>
+							<input type="text" class="form-control" id="input_sect_e" name="secteur" required>			
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_localisation">Localisation</label>
+							<input type="text" class="form-control" id="input_localisation" name="localisation" required>			
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_acceptes">Nombre d'étudiants déjà acceptés</label>
+							<input type="text" class="form-control" id="input_accpetes" name="acceptes" required>			
+						</div>
+
+						<div class="form-group col-lg col-md">
+							<label for="input_conf">Confiance</label>
+							<input type="text" class="form-control" id="input_conf" name="conf" required>			
+						</div>
+
+					</div>
+					<hr/>
+					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
+					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+				</section>
+
+
+			</form>
 		</div>
 	</div>
 </section>
@@ -193,8 +332,8 @@
 				</section>
 
 				<div class="form-group extra-s">
-					<label for="promotion_selec">Promotion</label>
-					<select class="form-control" id="promotion_selec">
+					<label for="promotion_selec_s">Promotion</label>
+					<select class="form-control" id="promotion_selec_s">
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
