@@ -1,5 +1,7 @@
 {% extends 'layout.twig' %}
 
+{% import 'form.twig' as form %}
+
 {% block content %}
 
 <section>
@@ -19,65 +21,26 @@
 		<div class="tab-pane fade show active" id="utilisateur" role="tabpanel" aria-labelledby="utilisateur-tab">
 			<form id="bloc-utilisateur" class="container" method="POST">
 
-				<section class="form-group p-2 m-0">
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="crea_user" id="user_opt_crea" type="radio" name="action_user" checked>
-						<label class="custom-control-label" for="user_opt_crea"><strong>Creation</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="supp_user" id="user_opt_supp" type="radio" name="action_user">
-						<label class="custom-control-label" for="user_opt_supp"><strong>Suppression</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="modif_user" id="user_opt_modif" type="radio" name="action_user">
-						<label class="custom-control-label" for="user_opt_modif"><strong>Modification</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="autre_user" id="user_opt_autre" type="radio" name="action_user">
-						<label class="custom-control-label" for="user_opt_autre"><strong>Autre</strong></label>
-					</div>
-				</section>
+				{{ form.radiobox('user',["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
 
 				<section id="input-bloc-utilsateur">
 					<div class="row">
-						<div class="form-group col-lg col-md">
-							<label for="input_lastn">Nom</label>
-							<input type="text" class="form-control" id="input_lastn" placeholder="Nom" name="lastn" required>
-						</div>
 
-						<div class="form-group col-lg col-md">
-							<label for="input_firstn">Prénom</label>
-							<input type="text" class="form-control" id="input_firstn" placeholder="Prénom" name="firstn" required>
-						</div>
+						{{ form.input('input_id',"ID")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="promotion_selec">Promotion</label>
-							<select class="form-control" id="promotion_selec" name="promo">
-								<option>A1</option>
-								<option>A1</option>
-								<option>A3</option>
-								<option>A4</option>
-								<option>A5</option>
-							</select>
-						</div>
+						{{ form.input('input_last',"Nom")}}
+
+						{{ form.input('input_firstn',"Prénom")}}
+
+						{{ form.select('promotion_selec',"Promotion", ["A1","A2","A3","A4","A5"])}}
+
 					</div>
 
 					<div class="row">
-						<div class="form-group col-lg col-md">
-							<label for="input_centre">Centre</label>
-							<input type="text" class="form-control" id="input_centre" name="centre" required>			
-						</div>
 
-						<div class="form-group col-lg col-md">
-							<label for="role_selec">Role</label>
-							<select class="form-control" id="role_selec" name="role" required>
-								<option>Étudiant</option>
-								<option>Délégué</option>
-								<option>Tuteur</option>
-								<option>Administrateur</option>
-							</select>
-							<p>Personnaliser les droits (délégués)</p>
-						</div>
+						{{ form.input('input_centre',"Centre")}}
+
+						{{ form.select('role_selec',"Role", ["Étudiant","Délégué","Tuteur","Administrateur"], "Personnaliser les droits (délégués)")}}
 					</div>
 
 
@@ -85,6 +48,7 @@
 						<label for="input_email">Adresse email</label>
 						<input type="email" class="form-control" id="input_email" placeholder="nom@example.com" value="test@mail.com" name="email" required>
 					</div>
+
 					<div class="form-group">
 						<label for="input_mdp">Mot de passe</label>
 						<input type="password" class="form-control" id="input_mdp" placeholder="8 charactères minimum" pattern=".{8,30}" name="mdp" required>
@@ -113,43 +77,15 @@
 
 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 			<form id="bloc_offre" class="container">
-				<section class="form-group p-2 m-0">
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="crea-offre" id="offre_opt_crea" type="radio" name="action_offre" checked>
-						<label class="custom-control-label" for="offre_opt_crea"><strong>Creation</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="supp-offre" id="offre_opt_supp" type="radio" name="action_offre">
-						<label class="custom-control-label" for="offre_opt_supp"><strong>Suppression</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="modif-offre" id="offre_opt_modif" type="radio" name="action_offre">
-						<label class="custom-control-label" for="offre_opt_modif"><strong>Modification</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="autre-offre" id="offre_opt_autre" type="radio" name="action_offre">
-						<label class="custom-control-label" for="offre_opt_autre"><strong>Autre</strong></label>
-					</div>
-				</section>
+
+				{{ form.radiobox('offre' ,["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
 
 				<section id="input-bloc-offre">
 					<div class="row">
+						{{ form.input('input_entreprise',"Entreprise")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_entreprise">Entreprise</label>
-							<input type="text" class="form-control" id="input_entreprise" name="nom_e" required>			
-						</div>
+						{{ form.select('promotion_selec_o',"Promotion", ["A1","A2","A3","A4","A5"])}}
 
-						<div class="form-group col-lg col-md">
-							<label for="promotion_selec_o">Promotion</label>
-							<select class="form-control" id="promotion_selec_o" name="promo">
-								<option>A1</option>
-								<option>A1</option>
-								<option>A3</option>
-								<option>A4</option>
-								<option>A5</option>
-							</select>
-						</div>
 
 						<div class="form-group col-lg col-md">
 							<p class="mb-2">Places</p>
@@ -163,20 +99,12 @@
 					</div>
 
 					<div class="row">
-						<div class="form-group col-lg col-md">
-							<label for="input_datestart">Date de début de stage</label>
-							<input type="date" class="form-control" id="input_datestart" placeholder="Début" name="debut" required>
-						</div>
+						{{ form.input('input_datestart',"Date de début de stage", "date")}}
+						
+						{{ form.input('duree_rng',"Durée","range")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="duree_rng">Durée</label>
-							<input type="range" class="custom-range" id="duree_rng" name="duree" required>
-						</div>
+						{{ form.input('input_competences',"Compétences requises (description ?)")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_competences">Compétences requises (description ?)</label>
-							<input type="text" class="form-control" id="input_competences" name="comptences" required>
-						</div>
 
 						<div class="form-group col-lg col-md">
 							<label for="input_gratif">Gratification</label>
@@ -197,52 +125,20 @@
 
 		<div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
 			<form id="bloc_entreprise" class="container">
-				<section class="form-group p-2 m-0">
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="crea_e" id="e_opt_crea" type="radio" name="action_entreprise" checked>
-						<label class="custom-control-label" for="e_opt_crea"><strong>Creation</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="supp_e" id="e_opt_supp" type="radio" name="action_entreprise">
-						<label class="custom-control-label" for="e_opt_supp"><strong>Suppression</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="modif_e" id="e_opt_modif" type="radio" name="action_entreprise">
-						<label class="custom-control-label" for="e_opt_modif"><strong>Modification</strong></label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input class="custom-control-input" value="autre_e" id="e_opt_autre" type="radio" name="action_entreprise">
-						<label class="custom-control-label" for="e_opt_autre"><strong>Autre</strong></label>
-					</div>
-				</section>
+
+				{{ form.radiobox('entreprise',["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
 
 				<section id="input-bloc-entreprise">
 					<div class="row">
+						{{ form.input('input_nom_e',"Nom")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_nom_e">Nom</label>
-							<input type="text" class="form-control" id="input_nom_e" placeholder="Nom" name="nom_e" required>
-						</div>
+						{{ form.input('input_sect_e',"Secteur d'activité")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_sect_e">Secteur d'activité</label>
-							<input type="text" class="form-control" id="input_sect_e" name="secteur" required>			
-						</div>
+						{{ form.input('input_localisation',"Localisation")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_localisation">Localisation</label>
-							<input type="text" class="form-control" id="input_localisation" name="localisation" required>			
-						</div>
+						{{ form.input('input_acceptes',"Nombre d'étudiants déjà acceptés")}}
 
-						<div class="form-group col-lg col-md">
-							<label for="input_acceptes">Nombre d'étudiants déjà acceptés</label>
-							<input type="text" class="form-control" id="input_accpetes" name="acceptes" required>			
-						</div>
-
-						<div class="form-group col-lg col-md">
-							<label for="input_conf">Confiance</label>
-							<input type="text" class="form-control" id="input_conf" name="conf" required>			
-						</div>
+						{{ form.input('input_conf',"Confiance")}}
 
 					</div>
 					<hr/>
