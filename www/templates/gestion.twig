@@ -4,9 +4,18 @@
 
 {% block content %}
 
+{% include 'header.twig'%}
+
+{% if alert_data[0] %}
+	<div class="alert alert-{{ alert_data[0] }}" role="alert">
+		{{ alert_data[1] }}
+	</div>
+{% endif %}
+
+
 <section>
 	<h5>Gestion</h5>
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
 		<li class="nav-item">
 			<a class="nav-link active" id="utilisateur-tab" data-toggle="tab" href="#utilisateur" role="tab" aria-controls="utilisateur" aria-selected="true">Utilisateurs</a>
 		</li>
@@ -19,18 +28,18 @@
 	</ul>
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active" id="utilisateur" role="tabpanel" aria-labelledby="utilisateur-tab">
-			<form id="bloc-utilisateur" class="container" method="POST">
+			<form id="bloc-utilisateur" class="container" method="POST" action="">
 
-				{{ form.radiobox('user',["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
+				{{ form.radiobox('user',["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
 
-				<section id="input-bloc-utilsateur">
+				<section id="input-bloc-user">
 					<div class="row">
 
-						{{ form.input('input_id',"ID")}}
+						{{ form.input('input_id',"ID","ID", "Identifiant",'number',"form_s","style=display:none", "min=1")}}
 
-						{{ form.input('input_last',"Nom")}}
+						{{ form.input('input_last',"Nom", "Nom", "Nom")}}
 
-						{{ form.input('input_firstn',"Prénom")}}
+						{{ form.input('input_firstn',"Prénom", "Prenom", "Prénom")}}
 
 						{{ form.select('promotion_selec',"Promotion", ["A1","A2","A3","A4","A5"])}}
 
@@ -38,24 +47,23 @@
 
 					<div class="row">
 
-						{{ form.input('input_centre',"Centre")}}
+						{{ form.input('input_centre',"Centre","Centre","Centre",'text',"form_nos")}}
 
-						{{ form.select('role_selec',"Role", ["Étudiant","Délégué","Tuteur","Administrateur"], "Personnaliser les droits (délégués)")}}
+						{{ form.select('role_selec',"Role", ["Étudiant","Délégué","Tuteur","Administrateur"], "Personnaliser les droits (délégués)", 'form_nos')}}
 					</div>
 
-
-					<div class="form-group">
+					<div class="form-group form_nos">
 						<label for="input_email">Adresse email</label>
 						<input type="email" class="form-control" id="input_email" placeholder="nom@example.com" value="test@mail.com" name="email" required>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group form_nos">
 						<label for="input_mdp">Mot de passe</label>
-						<input type="password" class="form-control" id="input_mdp" placeholder="8 charactères minimum" pattern=".{8,30}" name="mdp" required>
+						<input type="password" class="form-control form_nos" id="input_mdp" placeholder="8 charactères minimum" pattern=".{8,30}" name="mdp">
 						<div class="d-flex justify-content-center align-items-center p-1">
 							<label for="mdp_rng">Taille</label>
 							<input type="range" class="ml-2 mr-2" id="mdp_rng" value ="8" max="30" min="8" step="1" required>
-							<input type="number" id="input_size" value="8" style="width:30px;">
+							<input type="number" id="input_size" value="8" style="width:50px;">
 						</div>
 						<div class="d-flex justify-content-center">
 							<i class="fas fa-eye-slash m-3" id="hide_mdp"> Cacher</i>
@@ -66,9 +74,27 @@
 					</div>
 		
 					<hr />
-
+					<div class="modal fade" id="validation_modal" tabindex="-1" role="dialog" aria-labelledby="validation_Label" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="modal-title" id="validation_Label"></h3>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p id="p_modal"></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-danger">Confirmer</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
-					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+					<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" id="valid_btn" data-target="#validation_modal">Valider</button>
 				</section>
 
 
@@ -76,74 +102,115 @@
 		</div>
 
 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-			<form id="bloc_offre" class="container">
+			<form id="bloc_offre" class="container" method="POST" action="">
 
-				{{ form.radiobox('offre' ,["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
+				{{ form.radiobox('offre' ,["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
 
 				<section id="input-bloc-offre">
 					<div class="row">
-						{{ form.input('input_entreprise',"Entreprise")}}
+
+						{{ form.input('input_id_o',"ID","ID", "Identifiant",'text',"form_s","style=display:none", "min=1")}}
+
+						{{ form.input('input_titreoffre',"Titre","Titre","Entrez un titre", 'text', 'form_nos')}}
+
+						{{ form.input('input_entreprise',"Entreprise","Entreprise","Nom entreprise")}}
 
 						{{ form.select('promotion_selec_o',"Promotion", ["A1","A2","A3","A4","A5"])}}
 
+						{{ form.input('input_placetot',"Places","Places","Places", 'number', 'form_nos', '', 'min=1')}}
 
-						<div class="form-group col-lg col-md">
-							<p class="mb-2">Places</p>
-							<div class="d-flex align-items-center">
-								<label for="input_placetot">Total:</label>
-								<input type="number" class="form-control w-25 m-3" id="input_placetot" pattern=".{1,}" name="p_tot" required>
-								<label for="input_placerest">Restant:</label>
-								<input type="number" class="form-control w-25 m-3" id="input_placerest" pattern=".{1,}" name="p_left" required>
-							</div>			
-						</div>
 					</div>
 
 					<div class="row">
-						{{ form.input('input_datestart',"Date de début de stage", "date")}}
+						{{ form.input('input_datestart',"Date de début de stage","Date","Date", "date", "form_nos")}}
 						
-						{{ form.input('duree_rng',"Durée","range")}}
+						{{ form.input('duree_rng',"Durée du stage","Duree","Duree","range","form_nos")}}
 
-						{{ form.input('input_competences',"Compétences requises (description ?)")}}
+						{{ form.input('input_competences',"Compétences","Competences","Competences", 'textarea',"form_nos")}}
 
 
-						<div class="form-group col-lg col-md">
+						<div class="form-group col-lg col-md form_nos">
 							<label for="input_gratif">Gratification</label>
 							<div class="input-group-append">
-								<input type="number" class="form-control" id="input_gratif" name="gratif" aria-label="Euro, avec séparation par virgule">
+								<input type="number" class="form-control" id="input_gratif" name="gratif" min="0" aria-label="Euro, avec séparation par virgule">
 								<span class="input-group-text">€</span>
 							</div>
 						</div>
 					</div>
 					<hr/>
-
+					<div class="modal fade" id="validation_modal1" tabindex="-1" role="dialog" aria-labelledby="validation_Label1" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="modal-title" id="validation_Label1"></h3>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p id="p_modal1"></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-danger">Confirmer</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
-					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+					<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" id="valid_btn1" data-target="#validation_modal1">Valider</button>
 				</section>
 
 			</form>
 		</div>
 
 		<div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
-			<form id="bloc_entreprise" class="container">
+			<form id="bloc_entreprise" class="container" method="POST" action="">
 
-				{{ form.radiobox('entreprise',["Creation", "Suppression", "Modification", "Autre"], ["crea", "supp", "modif", "autre"])}}
+				{{ form.radiobox('entreprise',["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
 
 				<section id="input-bloc-entreprise">
 					<div class="row">
-						{{ form.input('input_nom_e',"Nom")}}
+						{{ form.input('input_id_e',"ID","ID","Identifiant",'text',"form_s","style=display:none", "min=1")}}
 
-						{{ form.input('input_sect_e',"Secteur d'activité")}}
+						{{ form.input('input_nom_e',"Nom entreprise","Nom","Nom")}}
 
-						{{ form.input('input_localisation',"Localisation")}}
+						{{ form.input('input_sect_e',"Secteur d'activité","Secteur","Secteur", 'text', 'form_nos')}}
 
-						{{ form.input('input_acceptes',"Nombre d'étudiants déjà acceptés")}}
-
-						{{ form.input('input_conf',"Confiance")}}
-
+						{{ form.input('input_localisation',"Localisation","Localisation","Localisation",'text','form_nos')}}
 					</div>
+					<div class="row">
+
+						{{ form.input('input_acceptes',"Nombre d'étudiants déjà acceptés","E_Acceptes","", 'number','form_nos')}}
+
+						{{ form.input('input_conf',"Confiance","Confiance","Confiance",'text','form_nos')}}
+					
+						{{ form.input('input_email',"Adresse email","email","entreprise@exemple.com",'email','form_nos', '', 'value=entreprise@mail.com')}}
+					</div>
+
 					<hr/>
+					<div class="modal fade" id="validation_modal2" tabindex="-1" role="dialog" aria-labelledby="validation_Label2" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="modal-title" id="validation_Label2"></h3>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p id="p_modal2"></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-danger">Confirmer</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<button type="reset" class="btn btn-outline-secondary m-2">Réinitialiser</button>
-					<button type="submit" class="btn btn-primary float-right m-2">Valider</button>
+					<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" id="valid_btn2" data-target="#validation_modal2">Valider</button>
+
 				</section>
 
 

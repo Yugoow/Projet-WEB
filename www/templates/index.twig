@@ -1,6 +1,12 @@
 {% extends 'layout.twig' %}
 
+{% import 'articles.twig' as art %}
+
 {% block content %}
+
+
+{% include	'header.twig'%}
+{{ var }}
 
 	<!--Partie principale, avec les dernières nouveautés et la wish-list-->
 
@@ -8,12 +14,8 @@
 <section class="sect-div">
 	<h5>Dernières offres de stage</h5>
 	<div class="disp_offre">
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage PARIS</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API</p>
 
-		</article>
+		{{ art.article("nvloffre", '/', 'Stage PARIS',"Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X", "Gestion d'une BDD reliée à des API")}}
 
 		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
 			<h6>Stage NANCY</h6>

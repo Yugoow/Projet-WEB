@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+{% include 'header.twig'%}
+
+{% if alert_data[0] %}
+	<div class="alert alert-{{ alert_data[0] }}" role="alert">
+		{{ alert_data[1] }}
+	</div>
+{% endif %}
+
+
+	<h5>Informations de compte</h5>
+	<section id="sect_conn">
+		<div id="compte">
+			<div>
+				<label for="id">Identifiant</label>
+				<p id="id" class="style_cmpt" aria-describedby="emailHelp"> 1 </p>
+				<small id="emailHelp" class="text-muted">On ne partagera jamais vos identifiants avec qui que ce soit.</small>
+			</div>
+			<div>
+				<label for="nom">Nom</label>
+				<label for="prenom" class="float-right">Prenom</label>
+			</div>
+			<div class="d-flex justify-content-between">
+				<p id="nom" class="style_cmpt space"> Buhon </p>
+				<p id="prenom" class="style_cmpt" style="text-align: right"> Paul </p>
+			</div>
+			<div>
+				<label for="input-centre">Centre</label>
+				<label for="input_promo" class="float-right">Promotion</label>
+			</div>
+			<div class="d-flex justify-content-between">
+				<p id="centre" class="style_cmpt space"> Nancy </p>
+				<p id="promotion" class="style_cmpt" style="text-align: right"> A2 Info </p>
+			</div>
+		</div>
+	</section>
+	
+{% endblock %}

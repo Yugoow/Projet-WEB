@@ -1,0 +1,127 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+{% include 'header.twig'%}
+
+{% if alert_data[0] %}
+	<div class="alert alert-{{ alert_data[0] }}" role="alert">
+		{{ alert_data[1] }}
+	</div>
+{% endif %}
+	<div class="all-screen" id="src_pg">
+		<i class="fas fa-chevron-left back_ic search_ic phone"></i>
+		<h4>RECHERCHER<label for="cp_selec" class="float-right">ID</label></h4>
+		<form id="search_f">
+			<div class="d-flex form-group">
+				<input class="form-control search" type="text" name="in_search" id="search_bar" placeholder="Indiquez un mot clé à rechercher">
+				<input class="form-control" type="text" name="in_search" id="search_ID" placeholder="Indiquez l'ID de l'offre">
+			</div>
+			<section id="check_zone" class="form-group">
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" value="opt1" id="option_1" type="radio" name="opt" checked>
+					<label class="custom-control-label" for="option_1"><strong>En fonction de mon profil</strong></label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" value="opt2" id="option_2" type="radio" name="opt">
+					<label class="custom-control-label" for="option_2"><strong>Second</strong></label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" value="opt3" id="option_3" type="radio" name="opt">
+					<label class="custom-control-label" for="option_3"><strong>Third</strong></label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" value="opt4" id="option_4" type="radio" name="opt">
+					<label class="custom-control-label" for="option_4"><strong>Personalisé</strong></label>
+				</div>
+			</section>
+
+			<div class="form-group extra-s">
+				<label class="titre_selec" for="promotion_selec">Promotion</label>
+				<select class="form-control selec" id="promotion_selec">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+			</div>
+
+			<div class="form-group extra-s">
+				<div>
+					<label class="titre_selec" for="ville_selec">Ville / Commune</label>
+					<label for="cp_selec" class="float-right titre_selec">Code Postal</label>
+				</div>
+				<div class="d-flex">
+					<input type="text" list="data-ville-sel" class="form-control selec" id="ville_selec">
+					<datalist id="data-ville-sel"></datalist>
+					<input type="text" list="data-cp-sel" class="form-control selec" id="cp_selec">
+					<datalist id="data-cp-sel"></datalist>              
+				</div>
+
+			</div>
+
+			<section id="check_duree" class="form-group extra-s">
+				<p class="titre_selec">Duree</p>
+				<div id="duree_style">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" id="optiond_1" type="checkbox" name="opt_1">
+						<label class="form-check-label" for="optiond_1">First</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" id="optiond_2" type="checkbox" name="opt_2">
+						<label class="form-check-label" for="optiond_2">Second</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" id="optiond_3" type="checkbox" name="opt_3">
+						<label class="form-check-label" for="optiond_3">Third</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" id="optiond_4" type="checkbox" name="opt_4">
+						<label class="form-check-label" for="optiond_4">Fourth</label>
+					</div>
+				</div>
+			</section>
+
+			<input type="submit" class="btn_e" value="Rechercher">
+			<input type="reset" class="float-right btn_e" id="reset_btn" value="Réinitialiser">
+		</form>
+	</div>
+
+	<section class="sect-div">
+		<h5>Offres</h5>
+		<div class="disp_offre">
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage PARIS</h6>
+				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage NANCY</h6>
+				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API. BLALALALALALANB AABfBBSDHALZFIHAIFHZIELFGAGBZV</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage METZ</h6>
+				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage MARSEILLE</h6>
+				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage STRASBOURG</h6>
+				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+		</div>
+	</section>
+
+{% endblock %}
