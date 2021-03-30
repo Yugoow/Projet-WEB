@@ -157,9 +157,7 @@ nav ul a {
 	display: none;
 }
 
-.form-group {
-	margin: 1rem;
-}
+
 
 #cp_selec {
 	width: 50%;
@@ -187,6 +185,25 @@ nav ul a {
 .tab-pane {
 	background: white;
 }
+
+
+/*COMPTE*/
+
+.style_cmpt{
+	background-color: #fff;
+	border-radius: 3px;
+	width: 100%;
+	padding: 0.3rem;
+}
+
+.space{
+	margin-right: 1rem;
+}
+
+
+
+
+
 
 /*Telephone*/
 
@@ -217,14 +234,6 @@ nav ul a {
 		display: none;
 	}
 
-	#search_ic2 {
-		display: block;
-		position: absolute;
-		font-size: 2.5rem;
-		right: 4.5rem;
-		top:2rem;
-		cursor: pointer;
-	}
 
 	#head_row {
 		background: none;
@@ -300,10 +309,153 @@ nav ul a {
 		justify-content: center;
 	}
 
-	#sect_conn form {
+/*COMPTE*/
+	#compte{
 		border: 1px solid grey;
-		padding: 0 1rem 1rem 1rem;
+		padding: 1rem;
 		width:50%;
 		min-width: 500px;
+	}
+
+	
+	.btn_e{
+		color: white;
+		font-weight: normal;
+		text-decoration: none;
+		font-size: 1rem;
+		padding: .5rem 1rem;
+		margin: 1rem;
+		width: auto;
+		background: #212529;
+		transition:.3s ease;
+		border-radius: 0;
+		border: 0 solid;
+	}
+	
+	.btn_e:hover{
+		transform:scale(1.05);
+		color: white;
+	}
+	
+	.search{
+		border: 1px solid rgb(153, 153, 153,.6);
+		border-radius: 3.5px;
+		background:	rgb(255, 255, 255,.1);
+		overflow-wrap : break-word;
+		color: #fff;
+		width: 100%;
+	}
+	
+	.search::placeholder{
+		color:#B8B8B8;
+	}
+	
+	
+	#titre_filtre {
+		display : none;
+	}
+	
+	#check_zone {
+		background: rgb(77, 77, 77);
+		display:flex;
+		justify-content: space-between;
+	}
+	
+	.selec{
+		background:	rgb(255, 255, 255,.1);
+		border: 1px solid rgb(153, 153, 153,.6);
+		color:#B8B8B8;
+	}
+	
+	#promotion_selec{
+		background:	rgb(255, 255, 255,.1);
+		border: 1px solid rgb(153, 153, 153,.6);
+		color:#B8B8B8;
+	}
+	
+	#promotion_selec option{
+		background-color: #5f5f5f;
+
+	}
+	
+	.titre_selec{
+		color: rgb(202 198 198);
+	}
+
+	.style_duree{
+		display:flex;
+		justify-content: space-between;
+	}
+	
+	#src_pg form  {
+		width: 100%;
+	}
+
+
+	
+	/*WISH-LIST PAGE*/
+	
+	#search_ic3{
+		cursor: pointer;
+	}
+	
+	#search_bar2{
+		
+		background:	rgb(255, 255, 255,.1);
+		overflow-wrap : break-word;
+		color: #fff;
+		font-size: 18px;
+		border: 0;
+		width: 0;
+		padding: 0;
+	}
+	
+	
+	#search_bar2::placeholder{
+		color:#B8B8B8;
+	}
+	
+	
+    /*OFFRE*/
+	
+	#search_ID {
+		width: 30%;
+		margin-left: .5rem;
+		border: 1px solid rgb(153, 153, 153,.6);
+		border-radius: 3.5px;
+		background:	rgb(255, 255, 255,.1);
+		overflow-wrap : break-word;
+		color: #fff;
+	}
+	
+	#search_ID::placeholder{
+		color:#B8B8B8;
+	}
+	
+
+	
+	/*ENTREPRISE*/
+	
+	.fiche_entreprise {
+		border:1px solid rgb(0, 0, 0,.3);
+		border-radius: 3.5px;
+		margin:1rem .5rem;
+		padding:1.5rem;
+		background:	rgb(255, 255, 255,.1);
+		overflow-wrap : break-word;
+		cursor: pointer;
+		transition:.3s ease;
+	}
+
+	.fiche_entreprise:hover{
+		transform: scale(1.03);
+
+	}
+	
+	.disp_entreprise {
+		display: grid;
+		grid-template-columns: 45% 45%;
+		justify-content: space-around;
+
 	}
 }
