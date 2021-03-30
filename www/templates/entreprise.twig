@@ -1,0 +1,76 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+{% include 'header.twig'%}
+
+{% if alert_data[0] %}
+	<div class="alert alert-{{ alert_data[0] }}" role="alert">
+		{{ alert_data[1] }}
+	</div>
+{% endif %}
+
+
+	<div class="all-screen" id="src_pg">
+		<i class="fas fa-chevron-left back_ic search_ic phone"></i>
+		<h4>RECHERCHER<label for="cp_selec" class="float-right">ID</label></h4>
+		<form id="search_f">
+			<div class="form-group d-flex">
+				<input class="form-control search" type="text" name="in_search" placeholder="Indiquez le nom de l'entreprise">
+				<input class="form-control" type="text" name="in_search" id="search_ID" placeholder="Indiquez l'ID de l'entreprise">
+			</div>
+			<section id="check_zone" class="form-group">
+				<div class="custom-control custom-radio">
+					<input class="custom-control-input" value="opt4" id="option_4" type="radio" name="opt">
+					<label class="custom-control-label" for="option_4"><strong>Personalisé</strong></label>
+				</div>
+			</section>
+
+			<div class="form-group extra-s">
+				<div>
+					<label class="titre_selec" for="act_selec">Secteur d'activite</label>
+				</div>
+				<div class="d-flex">
+					<input type="text" list="data-act-sel" class="form-control selec" id="act_selec">
+					<datalist id="data-act-sel"></datalist>             
+				</div>
+
+			</div>
+
+			<input type="submit" class="btn_e" value="Rechercher">
+			<input type="reset" class="float-right btn_e" id="reset_btn" value="Réinitialiser">
+		</form>
+	</div>
+
+	<section class="sect-div">
+		<h5>Entreprises</h5>
+		<div class="disp_offre">
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Team Buhon</h6>
+				<p>Identifiant : 1</p>
+				<p>Note : 8/10</p>
+				<p>localisation : Belleville-sur-Meuse</p>
+				<p>secteur d'activite : Vehicule</p>
+			</article>
+			
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Ineos</h6>
+				<p>Identifiant : 2</p>
+				<p>Note : 8/10</p>
+				<p>localisation : Etein</p>
+				<p>secteur d'activite : chimique</p>
+			</article>
+			
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>HPL</h6>
+				<p>Identifiant : 3</p>
+				<p>Note : 10/10</p>
+				<p>localisation : Nancy</p>
+				<p>secteur d'activite : Informatique</p>
+			</article>
+			
+
+		</div>
+	</section>
+
+{% endblock %}

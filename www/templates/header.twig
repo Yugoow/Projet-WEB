@@ -2,12 +2,11 @@
 <div class="row" id="head_row">
 	<header class="col-sm-12 d-flex justify-content-between justify-content-md-center align-items-center justify-content-lg-center justify-content-md-center">
 		<i class="fas fa-bars h4 m-2 menu_ic phone"></i>
-		<h3 onclick="window.location.href = 'index.php';"><i class="fas fa-poll"></i> LESITE</h3>
+		<h3 onclick="window.location.href = '/';"><i class="fas fa-poll"></i> AskforAstage</h3>
 		<i class="fas fa-search h4 m-2 search_ic phone"></i>
 	</header>
 </div>
 
-<div  id="search_ic2" class="ordi"><i class="fas fa-search"></i></div>
 
 <!--Bloc navigation, avec le menu -->
 <nav class="all-screen">
@@ -15,13 +14,19 @@
 	<h4 class="phone">MENU</h4>
 	<hr class="phone" style="background: white; width: 50%">
 	<ul>
+		<!--
 		<li><a href="connexion.html">Connexion</a></li>
 		<li><a href="offre.html">Offres (ou directement vià la recherche ?</a></li>
-		<li><a href="gestion.html">Gestion comptes (global ?) (quand connecté)</a></li>
+		<li><a href="?p=gestion">Gestion comptes (global ?) (quand connecté)</a></li>
 		<li><a href="wihslist.html">Wish-List</a></li>
 		<li><a href="candidature.html">Candidature</a></li>
 		<li><a href="connexion.html">Compte (à mettre à connexion quand connecté)</a></li>
 		<li><a href="deconnexion.html" id="discret">Deconnexion</a></li>
+		-->
+		{% for i in seq %}
+		<li><a href={{ i['url'] }} {{ i['id'] }}>{{ i['nom'] }}</a></li>
+		{% endfor %}
 	</ul>
+
 	<hr class="ordi" style="background: white; width: 95%">
 </nav>

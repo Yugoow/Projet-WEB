@@ -1,0 +1,97 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+{% include 'header.twig'%}
+
+{% if alert_data[0] %}
+	<div class="alert alert-{{ alert_data[0] }}" role="alert">
+		{{ alert_data[1] }}
+	</div>
+{% endif %}
+
+
+	<section class="sect-div">
+
+		<h5>WISH-LIST 
+			<i id="search_ic3" class="fas fa-search float-right ordi"></i>
+			<i class="far fa-bookmark float-right phone"></i>
+			<input class="float-right search_bar2hide ordi" type="text" name="in_search" id="search_bar2" placeholder="Indiquez un stage à rechercher">
+		</h5>
+
+		<div id="wlist" class="disp_offre">
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage NANCY</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage REIMS</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage VERDUN</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage BREST</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage DIJON</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage NANCY</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage LYON</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage MARSEILLE</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage PARIS</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage BREST</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage DIEU</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+
+			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6>Stage MONTPELIER</h6>
+				<p>Domaine : Informatique   Promotion : BAC+2   Dates :X/X/X - X/X/X</p>
+				<p>Gestion d'une BDD reliéeà des API</p>
+			</article>
+		</div>
+	</section>
+
+{% endblock %}

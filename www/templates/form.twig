@@ -1,0 +1,46 @@
+{% macro input(id, label,name,pholder, type="text",class, extra="",param="") %}
+	<div class="form-group col-lg col-md {{ class }}" {{ extra }}>
+		<label for="{{ id }}">{{ label }}</label>
+		<input type="{{ type }}" class="form-control" id="{{ id }}" placeholder="{{ pholder }}" {{ param }} name="{{ name }}">
+	</div>
+{% endmacro %}
+
+
+{% macro select(name, label, data, extra, class) %}
+	<div class="form-group col-lg col-md {{ class }}">
+		<label for="{{ name }}">{{ label }}</label>
+
+		<select class="form-control" id="{{ name }}" name="{{ label }}">
+			{% for item in data %}
+				<option>{{ item }}</option>
+			{% endfor %}
+		</select>
+		{% if extra %}
+			<p>{{ extra }}</p>
+		{% endif %}
+	</div>
+{% endmacro %}
+
+
+{% macro radiobox(categorie,label, actions, check="Creation") %}
+	<section class="form-group p-2 m-0">
+		{% for i in 0..3 %}
+			{% if label[i] == check %}
+				{{ _self.radio(categorie~'_opt_'~actions[i] ,"action_"~categorie, label[i], actions[i], 'checked')}}
+			{% else %}
+				{{ _self.radio(categorie~'_opt_'~actions[i] ,"action_"~categorie, label[i], actions[i])}}
+			{% endif %}
+
+		{% endfor %}
+
+	</section>
+
+{% endmacro %}
+
+
+{% macro radio(id, name, label,value, check='',type="radio") %}
+	<div class="custom-control custom-radio">
+		<input class="custom-control-input {{ name }}" value="{{ value }}" id="{{ id }}" type="{{ type }}" name="{{ name }}" {{ check }}>
+		<label class="custom-control-label" for="{{ id }}"><strong>{{ label }}</strong></label>
+	</div>
+{% endmacro %}
