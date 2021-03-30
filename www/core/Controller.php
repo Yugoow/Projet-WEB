@@ -1,6 +1,7 @@
 <?php
+namespace core;
 require_once('./vendor/autoload.php');
-
+require_once('Model.php');
 $dir = opendir('controller/');
 
 while(($currentFile = readdir($dir)) !== false){
@@ -15,8 +16,10 @@ closedir($dir);
 class Controller{
 	protected $loader;
 	protected $twig;
+	protected $head;
 	private $index;
 	private $user;
+	protected $db;
 
 
 	public function __construct(){
@@ -24,31 +27,38 @@ class Controller{
 		$this->twig = new \Twig\Environment($this->loader, [
 	    	'cache' => false//__DIR__.'/tmp'
 	    ]);
+	    $this->db = new Model('projet_web');
+	    $this->head = new Header();
 	}
 
 
 	function select($page){
 		switch($page) {
 		    case 'index':
-		    	$this->index = new Index($page, $this);
+		    	$index = new Index($this);
 		        break;
 		    case 'gestion':
-		        $this->twig = new Gestion($page, $this);
+		        $gestion = new Gestion($this);
+		        $gestion->generateGestion();
 		        break;
 		    case 'wishlist':
-		        $this->twig = new Wishlist($page, $this);
+		        $wishlist = new Wishlist($this);
 		        break;
 		    case 'candidature':
-		        $this->twig = new Candidature($page, $this);
+		        $candidature = new Candidature($this);
 		        break;
 		    case 'compte':
-		        $this->twig = new Compte($page, $this);
+		        $compte = new Compte($this);
+		        break;
+		    case 'entreprise':
+		        $entreprise = new Entreprise($this);
+		        break;
+		    case 'offre':
+		        $offre = new Offre($this);
+		        $offre->generateOffre();
 		        break;
 		    case 'deconnexion':
-		        $this->twig = new Deconnexion($page, $this);
-		        break;
-		    case 'add':
-		        $this->user = new Adduser($page, $this);
+		        $deconnexion = new Deconnexion($this);
 		        break;
 
 		    // A SUPPRIMER
