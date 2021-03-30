@@ -1,40 +1,37 @@
 <?php
-
+namespace core;
 class Header extends Controller {
 	private $default_menu;
-	private $menu;
+	public $menu;
 	private $user;
-	private Controller $parent;
 
 
-	function __construct(Controller $parent){
-		$this->parent = $parent;
+	function __construct(){
 		$this->default_menu = array(
-			1=>array('nom' => 'Offres', 'url' => '?p=offres'),
-			2=>array('nom' => 'Entreprises', 'url' => '?p=offres'),
-			4=>array('nom' => 'WISH-LIST', 'url' => '?p=connexion'),
+			1=>array('nom' => 'Offres', 'url' => '?p=offre'),
+			2=>array('nom' => 'Entreprises', 'url' => '?p=entreprise'),
+			4=>array('nom' => 'WISH-LIST', 'url' => '?p=wishlist'),
 			5=>array('nom' => 'Candidature', 'url' => '?p=candidature'),
-			6=>array('nom' => 'Compte', 'url' => '?p=connexion'),
-			7=>array('nom' => 'Deconnexion', 'url' => '?p=connexion',  'id'=>'id=discret'));
+			6=>array('nom' => 'Compte', 'url' => '?p=compte'),
+			7=>array('nom' => 'Deconnexion', 'url' => '?p=deconnexion',  'id'=>'id=discret'));
 
 		$this->user = $_SERVER['REMOTE_USER']; //Ici récupérer le role (et pas utilisateur) de l'utilisateur pour vérifier l'accès au menu pour l'accès aux pages. 
 	}
 
-	function tryheader($var){
+	function generateHeader(){
 		switch($this->user){
 			case 'admin':
 				$this->menu = $this->default_menu;
 				$this->menu[3]= array('nom'=>'Gestion', 'url'=>'?p=gestion');
-				$this->menu[8]= array('nom'=>'TEMP ADMIN', 'url'=>'?p=add');
 				ksort($this->menu);
 				break;
 
 			case 'tuteur':
-				# code...
+				$this->menu = $this->default_menu;
 				break;
 
 			case 'delegue':
-				# code...
+				$this->menu = $this->default_menu;
 				break;
 
 			case 'etudiant':
@@ -46,9 +43,6 @@ class Header extends Controller {
 				break;
 		}
 
-		if(empty($denied)){
-			echo $this->parent->twig->render('header.twig', ['seq'=> $this->menu, 'var'=>$var]);
-		}
 	}
 }
 
