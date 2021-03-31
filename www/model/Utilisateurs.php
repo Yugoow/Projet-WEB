@@ -5,6 +5,7 @@ class Utilisateurs extends Model{
 
 	private Model $parent;
 
+
 	public function __construct(Model $parent){
 		$this->parent = $parent;
 	}
@@ -41,14 +42,7 @@ class Utilisateurs extends Model{
 	    }
 	}
 
-
-
-	public function getIdbyRole($param){
-		$role = $this->parent->role->getIDbyArg($param);
-		return $role;
-	}
-
-
+	
 	public function getbyID($id){
 		try {
 			$sql = "SELECT Nom, Prenom , Centre, Promotion, Identifiant, id_Roles FROM utilisateurs WHERE id=:id ";
@@ -65,9 +59,9 @@ class Utilisateurs extends Model{
 
 	public function getIDbyArg($args){
 		try {
-			$sql = "SELECT id FROM utilisateurs WHERE Nom=:Nom AND Prenom=:Prenom";
+			$sql = "SELECT id FROM utilisateurs WHERE Identifiant = :email";
 			$stmt = $this->parent->prepare($sql);
-			$stmt->execute(['Nom'=>$args[0], 'Prenom'=>$args[1]]);
+			$stmt->execute(['email'=>$args]);
 			$q=$stmt->fetch();
 			return $q;
 
@@ -76,28 +70,10 @@ class Utilisateurs extends Model{
 	    	echo $sql . "<br>" . $e->getMessage();
 	    }		
 	}
-/*
-	// récupere tous les users
-	function getAllUsers() {
-		$con = getDatabaseConnexion();
-		$requete = 'SELECT * from utilisateurs';
-		$rows = $con->query($requete);
-		foreach($rows as $row){
-		    echo $row[1].' '.$row[2];
-		};
-	}
 
-	//recupere un user
-	function readUser($id) {
-		$con = getDatabaseConnexion();
-		$requete = "SELECT * from utilisateurs where id = '$id' ";
-		$stmt = $con->query($requete);
-		$row = $stmt->fetchAll();
-		if (!empty($row)) {
-			return $row[0];
-		}
-		
-	}
+
+/*
+
 
 	//met à jour le user
 	function updateUser($id, $nom, $prenom, $age, $adresse) {
@@ -115,18 +91,7 @@ class Utilisateurs extends Model{
 	    	echo $sql . "<br>" . $e->getMessage();
 	    }
 	}
-
-	// suprime un user
-	function deleteUser($id) {
-		try {
-			$con = getDatabaseConnexion();
-			$requete = "DELETE from utilisateurs where id = '$id' ";
-			$stmt = $con->query($requete);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}*/
+*/
 }
 
 

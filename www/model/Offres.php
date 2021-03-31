@@ -42,10 +42,24 @@ class Offres extends Model{
 	}
 
 
+	public function getlastOffres(){
+		try {
+			$sql = "SELECT id, Competence, Type_promo, Duree, Remuneration, Date_offre, Nombre_places, Titre, id_Entreprises FROM offres ORDER BY id DESC LIMIT 6;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute();
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+
 
 	public function getbyID($id){
 		try {
-			$sql = "SELECT Type_promo, Duree, Remuneration, Nombre_places, id_Entreprises, Date_offre , Competence, Titre FROM offres WHERE id=:id ";
+			$sql = "SELECT k.id, k.Competence, k.Promo, k.Duree, k.Remuneration, k.Date_offre, k.Nombre_place, k.Nom, k.Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where id=:id;";
 			$stmt = $this->parent->prepare($sql);
 			$stmt->execute(['id'=>$id]);
 			$q=$stmt->fetch();
