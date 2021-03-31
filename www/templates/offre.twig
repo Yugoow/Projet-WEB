@@ -4,18 +4,14 @@
 
 {% include 'header.twig'%}
 
-{% if alert_data[0] %}
-	<div class="alert alert-{{ alert_data[0] }}" role="alert">
-		{{ alert_data[1] }}
-	</div>
-{% endif %}
+
 	<div class="all-screen" id="src_pg">
 		<i class="fas fa-chevron-left back_ic search_ic phone"></i>
 		<h4>RECHERCHER<label for="cp_selec" class="float-right">ID</label></h4>
-		<form id="search_f">
+		<form id="search_f" method="POST" action="">
 			<div class="d-flex form-group">
 				<input class="form-control search" type="text" name="in_search" id="search_bar" placeholder="Indiquez un mot clé à rechercher">
-				<input class="form-control" type="text" name="in_search" id="search_ID" placeholder="Indiquez l'ID de l'offre">
+				<input class="form-control" type="text" name="Search_id" id="search_ID" placeholder="Indiquez l'ID de l'offre">
 			</div>
 			<section id="check_zone" class="form-group">
 				<div class="custom-control custom-radio">
@@ -91,36 +87,19 @@
 	<section class="sect-div">
 		<h5>Offres</h5>
 		<div class="disp_offre">
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Stage PARIS</h6>
-				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-				<p>Gestion d'une BDD reliéeà des API</p>
-
+		
+			<article id="offre_stage" class="nvloffre" onclick="window.location.href = 'connexion.html';" style="display:none">
+				<h6  id="titre_offre">{{offre['Titre'] }}</h6>
+				<p>Identifiant : {{offre['id'] }}</p>
+				<p>Competence : {{offre['Competence'] }}</p>
+				<p>promotion : {{offre['Promo'] }}</p>
+				<p>Duree : {{offre['Duree'] }}</p>
+				<p>Remuneration : {{offre['Remuneration'] }} $</p>
+				<p>Debut du stage : {{offre['Date_offre'] }}</p>
+				<p>Place : {{offre['Nombre_place'] }} etudiant(s)</p>
+				<p>Entreprise : {{offre['Nom'] }}</p>
 			</article>
-
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Stage NANCY</h6>
-				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-				<p>Gestion d'une BDD reliéeà des API. BLALALALALALANB AABfBBSDHALZFIHAIFHZIELFGAGBZV</p>
-			</article>
-
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Stage METZ</h6>
-				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-				<p>Gestion d'une BDD reliéeà des API</p>
-			</article>
-
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Stage MARSEILLE</h6>
-				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-				<p>Gestion d'une BDD reliéeà des API</p>
-			</article>
-
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Stage STRASBOURG</h6>
-				<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-				<p>Gestion d'une BDD reliéeà des API</p>
-			</article>
+			
 		</div>
 	</section>
 
