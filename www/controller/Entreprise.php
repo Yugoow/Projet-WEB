@@ -8,10 +8,13 @@ class Entreprise extends Controller{
     function __construct(Controller $parent){
     	$this->parent = $parent;
         $this->parent->head->generateHeader();
-        echo $this->parent->twig->render('entreprise.twig', ['seq'=>$this->parent->head->menu]);
 
     }
 
+    public function generateEntreprise(){
+        echo $this->parent->twig->render('entreprise.twig', ['seq'=>$this->parent->head->menu]);
+    	
+    }
 
 }
 

@@ -10,5 +10,8 @@ class Candidature extends Controller{
         echo $this->parent->twig->render('candidature.twig', ['seq'=>$this->parent->head->menu]);
     }
 
+    public function generateCandidature(){
+
+    }
 }
 ?>

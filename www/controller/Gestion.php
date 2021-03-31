@@ -7,6 +7,7 @@ class Gestion extends Controller{
     private Offres $offre;
     private Entreprises $entreprise;
     private Controller $parent;
+    private Roles $role_cl;
     protected $inputs;
 
     function __construct(Controller $parent){
@@ -16,6 +17,8 @@ class Gestion extends Controller{
         $this->user = new Utilisateurs($this->parent->db);
         $this->offre = new Offres($this->parent->db);
         $this->entreprise = new Entreprises($this->parent->db);
+        $this->role_cl = new Roles($this->parent->db);
+        $this->wlist = new Wish_list($this->parent->db);
     }
 
     protected function generateGestion(){
@@ -71,10 +74,11 @@ class Gestion extends Controller{
             $this->getInput($tab);
             try{
                 $role = array_pop($this->inputs);
-                $r_id = $this->user->getIDbyRole($role);
+                $r_id = $this->role_cl->getIDbyArg($role);
                 if(isset($r_id['id'])){
                     $this->inputs["id_R"]=$r_id['id'];
                 }
+                $this->wlist->ajout($inputs['ID']);
             }
             catch(Exeption $e){
                 $this->data = ["warning", "Erreur"];
@@ -84,11 +88,12 @@ class Gestion extends Controller{
         else if($action=="suppression"){
             $tab=['ID', 'Nom', 'Prenom','Promotion'];
             $mdp_temp = null;
-            //$this->getInput($tab, 'id_R',4); CHNAGER CHANGER §§§§§
+            $this->getInput($tab);
 
             $user_del = $this->$inCat->getbyID($this->inputs['ID']);
             $email_temp =$user_del['Identifiant'];
             $this->inputs = array_replace($this->inputs, $user_del);
+            $this->wlist->suppression($inputs['ID']);
         }
 
 
