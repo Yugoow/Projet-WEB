@@ -1,5 +1,14 @@
 $(document).ready(function()
 {
+/*OFFRE GESTION AFFICHAGE*/
+	if ($('#titre_offre').text() == "")
+	{
+		$('#offre_stage').css({'display': 'none'});
+	} else
+	{
+		$('#offre_stage').css({'display': 'block'});
+	}	
+
 	$('#input_mdp').prop('required', true);
 /*GESTION DU MENU ET DE LA RECHERCHE (APPARITION)*/
 	/*MENU*/
@@ -18,6 +27,31 @@ $(document).ready(function()
 		$('#search_ic3').css({'display': 'none'});
 	});
 
+
+/*AJOUT A LA WISH LIST DEPUIS LE MENU*/
+	$('.not_wish').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Wish_action.php",
+			data: { id_wish: id }
+			}).done(function( response ) {
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);
+		});
+	});
+
+/*SUPPRESSION DE LA WLIST*/
+	$('.in_wish').click(function() {
+		var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Wish_action.php",
+			data: { id_del: id }
+			}).done(function( response ) {
+				$('#wish_alert').html(response);
+		});
+	});
 /*FILTRES GLOBAUX DE RECHERCHE*/
 	$('#search_f .custom-control-input').on('click',function(){
 		if( $('#search_f .custom-control-input:checked').val()=='opt4'){
@@ -34,6 +68,8 @@ $(document).ready(function()
 			$('.extra-s').slideUp();
 		}
 	});
+
+
 
 
 
