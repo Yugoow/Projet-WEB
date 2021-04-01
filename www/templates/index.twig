@@ -35,7 +35,7 @@
 			<h6>{{ item['Titre'] }}<i class="far fa-bookmark not_wish float-right m-1"  id="id_{{item['id']}}"></i></h6>
 			<p>Identifiant : {{ item['id'] }}</p>
 			<p>Competences : {{ item['Competence'] }} | Promotion : {{ item['Type_promo']}} |  Dates : {{ item['Date_offre'] }}</p>
-			<p>Stage de {{ item['Duree'] }} mois pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
+			<p>Stage de {{ item['Duree'] }} pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
 			<p>Rémunéré à {{ item['Remuneration'] }} €/mois<i class="fas fa-file-alt float-right not_cand" id="idcand_{{item['id']}}" style="font-size:1.3rem;"></i></p>
 		</article>
 	{% endfor %}
@@ -55,7 +55,7 @@
 			<h6>{{ item['Titre'] }}<i class="fas fa-trash-alt float-right in_wish m-2" id="trash_{{ item['id'] }}"></i></h6>
 			<p>Identifiant : {{ item['id'] }}</p>
 			<p>Competences : {{ item['Competence'] }} | Promotion : {{ item['Type_promo']}} |  Dates : {{ item['Date_offre'] }}</p>
-			<p>Stage de {{ item['Duree'] }} mois pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
+			<p>Stage de {{ item['Duree'] }} pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
 			<p>Rémunéré à {{ item['Remuneration'] }} €/mois<i class="fas fa-file-alt float-right not_cand" id="idcand_{{item['id']}}" style="font-size:1.3rem;"></i></p>
 		</article>
 
