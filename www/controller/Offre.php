@@ -13,22 +13,27 @@ class Offre extends Controller{
         $this->offre = new Offres($this->parent->db);
         $this->entreprise = new Entreprises($this->parent->db);
     }
-
+    
     protected function generateOffre(){
-        $id = $this->getID_offre();
-        $donnee = $this->offre->getbyID($id);
-        echo $this->parent->twig->render('offre.twig', ['seq'=>$this->parent->head->menu, 'offre'=>$donnee]);
-
-
-    }
-
-    private function getID_offre(){
-        if(isset($_POST['Search_id'])){
+        $donnee="";
+        
+        if(!empty($_POST['Search_id'])){
             $id = $_POST['Search_id'];
-            return $id;
-        }
+            $donnee = $this->offre->getbyID($id);
+        }else if(!empty($_POST['in_search'])){
+            $id = $_POST['in_search'];
+            $donnee = $this->offre->getName($id);
+        }else if(!empty($_POST['promo_selec'])){
+            $id = $_POST['promo_selec'];
+            $donnee = $this->offre->getPromo($id);
+        }else if(!empty($_POST['opt2'])){
+            $id = $_POST['opt2'];
+            $donnee = $this->offre->getDuree($id);
+        }   
+        echo $this->parent->twig->render('offre.twig', ['seq'=>$this->parent->head->menu, 'offres'=>$donnee]);
+            
+        
     }
-
 
     public function getlastOffre(){
         $offres_list = $this->offre->getlastOffres();
@@ -49,6 +54,7 @@ class Offre extends Controller{
 
         return [$msg, $list_offre];
     }
+    
 
 }
 

@@ -10,7 +10,6 @@ class Header extends Controller {
 		$this->default_menu = array(
 			1=>array('nom' => 'Accueil', 'url' => '/'),
 			2=>array('nom' => 'Offres', 'url' => '?p=offre'),
-			4=>array('nom' => 'Utilisateurs', 'url' => '/'),
 			5=>array('nom' => 'Entreprises', 'url' => '?p=entreprise'),
 			6=>array('nom' => 'WISH-LIST', 'url' => '?p=wishlist'),
 			7=>array('nom' => 'Candidature', 'url' => '?p=candidature'),
@@ -26,11 +25,14 @@ class Header extends Controller {
 			case 1:
 				$this->menu = $this->default_menu;
 				$this->menu[3]= array('nom'=>'Gestion', 'url'=>'?p=gestion');
+				$this->menu[4]= array('nom' => 'Utilisateurs', 'url' => '?p=utilisateur');
 				ksort($this->menu);
 				break;
 
 			case 2:
 				$this->menu = $this->default_menu;
+				$this->menu[4]= array('nom' => 'Utilisateurs', 'url' => '?p=utilisateur');
+				ksort($this->menu);
 				break;
 
 			case 3:
