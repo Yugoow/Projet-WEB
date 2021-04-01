@@ -4,19 +4,13 @@
 
 {% include 'header.twig'%}
 
-{% if alert_data[0] %}
-	<div class="alert alert-{{ alert_data[0] }}" role="alert">
-		{{ alert_data[1] }}
-	</div>
-{% endif %}
-
 
 	<div class="all-screen" id="src_pg">
 		<i class="fas fa-chevron-left back_ic search_ic phone"></i>
 		<h4>RECHERCHER<label for="cp_selec" class="float-right">ID</label></h4>
-		<form id="search_f">
+		<form id="search_f" method="POST" action="">
 			<div class="form-group d-flex">
-				<input class="form-control search" type="text" name="in_search" placeholder="Indiquez le nom de l'entreprise">
+				<input class="form-control search" type="text" name="search2" placeholder="Indiquez le nom de l'entreprise">
 				<input class="form-control" type="text" name="in_search" id="search_ID" placeholder="Indiquez l'ID de l'entreprise">
 			</div>
 			<section id="check_zone" class="form-group">
@@ -31,7 +25,7 @@
 					<label class="titre_selec" for="act_selec">Secteur d'activite</label>
 				</div>
 				<div class="d-flex">
-					<input type="text" list="data-act-sel" class="form-control selec" id="act_selec">
+					<input type="text" name="sect_act" list="data-act-sel" class="form-control selec search" id="act_selec" placeholder="Indiquez le secteur d'activite de l'entreprise">
 					<datalist id="data-act-sel"></datalist>             
 				</div>
 
@@ -43,32 +37,18 @@
 	</div>
 
 	<section class="sect-div">
-		<h5>Entreprises</h5>
+		<h5 id="titre_show">Entreprises</h5>
 		<div class="disp_offre">
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Team Buhon</h6>
-				<p>Identifiant : 1</p>
-				<p>Note : 8/10</p>
-				<p>localisation : Belleville-sur-Meuse</p>
-				<p>secteur d'activite : Vehicule</p>
+		{% for entreprise in entreprises%}
+			<article id="offre_stage" class="nvloffre" onclick="window.location.href = 'connexion.html';">
+				<h6  id="titre_offre">{{entreprise['Nom'] }}</h6>
+				<p>Identifiant : {{entreprise['id'] }}</p>
+				<p>secteur d'activite : {{entreprise['Secteur_activite'] }}</p>
+				<p>Localite : {{entreprise['Localite'] }}</p>
+				<p>Email : {{entreprise['Email'] }}</p>
+				<p>Nombre d'etudiant : {{entreprise['Nombre_etudiants'] }} etudiant(s) </p>
 			</article>
-			
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>Ineos</h6>
-				<p>Identifiant : 2</p>
-				<p>Note : 8/10</p>
-				<p>localisation : Etein</p>
-				<p>secteur d'activite : chimique</p>
-			</article>
-			
-			<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-				<h6>HPL</h6>
-				<p>Identifiant : 3</p>
-				<p>Note : 10/10</p>
-				<p>localisation : Nancy</p>
-				<p>secteur d'activite : Informatique</p>
-			</article>
-			
+		{% endfor %}
 
 		</div>
 	</section>

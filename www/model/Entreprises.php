@@ -29,10 +29,10 @@ class Entreprises extends Model{
 
 	public function suppression($inputs){
 		try {
-			$sql = "DELETE FROM entreprises WHERE id=:ID";
+			$sql = "DELETE FROM contenir WHERE id_Offres IN (SELECT offres.id FROM offres WHERE id_Entreprises=:ID);DELETE FROM offres WHERE id_Entreprises=:ID;DELETE FROM entreprises WHERE id=:ID";
 			$stmt = $this->parent->prepare($sql);
 			$stmt->execute(['ID'=>$inputs['ID']]);
-			return ['success',"L'entreprise ".$inputs["Nom"]." | ID : ".$inputs['ID']." a été supprimée avec succès !"];
+			return ['success',"L'entreprise ".$inputs["Nom"]." | ID : ".$inputs['ID']." (et toutes ses offres) a été supprimée avec succès !"];
 
 		}
 	    catch(PDOException $e) {
@@ -70,6 +70,53 @@ class Entreprises extends Model{
             echo $sql . "<br>" . $e->getMessage();
         }       
     }
+	
+
+
+	public function getID($id){
+		try {
+			$sql = "SELECT id, Nom, Secteur_activite, Localite, Email, Nombre_etudiants from entreprises where id=:id;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['id'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getName($id){
+		try {
+			$sql = "SELECT id, Nom, Secteur_activite, Localite, Email, Nombre_etudiants from entreprises where Nom=:nom;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['nom'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getSect($id){
+		try {
+			$sql = "SELECT id, Nom, Secteur_activite, Localite, Email, Nombre_etudiants from entreprises where Secteur_activite=:sect;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['sect'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	
+	
 }
 
 

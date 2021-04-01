@@ -1,18 +1,18 @@
-{% macro input(id, label,name,pholder, type="text",class, extra="",param="") %}
+{% macro input(id, label,name,pholder, type="text",class="form_nos", extra="",param="") %}
 	<div class="form-group col-lg col-md {{ class }}" {{ extra }}>
 		<label for="{{ id }}">{{ label }}</label>
-		<input type="{{ type }}" class="form-control" id="{{ id }}" placeholder="{{ pholder }}" {{ param }} name="{{ name }}">
+		<input type="{{ type }}" class="form-control {{ class }}" id="{{ id }}" placeholder="{{ pholder }}" {{ param }} name="{{ name }}">
 	</div>
 {% endmacro %}
 
 
-{% macro select(name, label, data, extra, class) %}
+{% macro select(name, label, data, data2, extra, class="form_nos") %}
 	<div class="form-group col-lg col-md {{ class }}">
 		<label for="{{ name }}">{{ label }}</label>
 
 		<select class="form-control" id="{{ name }}" name="{{ label }}">
-			{% for item in data %}
-				<option>{{ item }}</option>
+			{% for i in 0..data|length -1 %}
+				<option value="{{ data2[i] }}">{{ data[i] }}</option>
 			{% endfor %}
 		</select>
 		{% if extra %}
@@ -24,7 +24,7 @@
 
 {% macro radiobox(categorie,label, actions, check="Creation") %}
 	<section class="form-group p-2 m-0">
-		{% for i in 0..3 %}
+		{% for i in 0..2 %}
 			{% if label[i] == check %}
 				{{ _self.radio(categorie~'_opt_'~actions[i] ,"action_"~categorie, label[i], actions[i], 'checked')}}
 			{% else %}

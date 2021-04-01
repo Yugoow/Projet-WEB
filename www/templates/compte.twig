@@ -16,24 +16,28 @@
 		<div id="compte">
 			<div>
 				<label for="id">Identifiant</label>
-				<p id="id" class="style_cmpt" aria-describedby="emailHelp"> 1 </p>
+				<p id="id" class="style_cmpt" aria-describedby="emailHelp">{{ param['id'] }}</p>
 				<small id="emailHelp" class="text-muted">On ne partagera jamais vos identifiants avec qui que ce soit.</small>
+			</div>
+			<div>
+				<label for="adr_email">Adresse email</label>
+				<p id="adr_email" class="style_cmpt">{{ param['Identifiant'] }}</p>
 			</div>
 			<div>
 				<label for="nom">Nom</label>
 				<label for="prenom" class="float-right">Prenom</label>
 			</div>
 			<div class="d-flex justify-content-between">
-				<p id="nom" class="style_cmpt space"> Buhon </p>
-				<p id="prenom" class="style_cmpt" style="text-align: right"> Paul </p>
+				<p id="nom" class="style_cmpt space">{{ param['Nom'] }}</p>
+				<p id="prenom" class="style_cmpt" style="text-align: right">{{ param['Prenom'] }}</p>
 			</div>
 			<div>
 				<label for="input-centre">Centre</label>
 				<label for="input_promo" class="float-right">Promotion</label>
 			</div>
 			<div class="d-flex justify-content-between">
-				<p id="centre" class="style_cmpt space"> Nancy </p>
-				<p id="promotion" class="style_cmpt" style="text-align: right"> A2 Info </p>
+				<p id="centre" class="style_cmpt space">{{ param['Centre'] }}</p>
+				<p id="promotion" class="style_cmpt" style="text-align: right">{{ param['Promotion'] }}</p>
 			</div>
 		</div>
 	</section>

@@ -5,6 +5,7 @@ class Utilisateurs extends Model{
 
 	private Model $parent;
 
+
 	public function __construct(Model $parent){
 		$this->parent = $parent;
 	}
@@ -14,7 +15,7 @@ class Utilisateurs extends Model{
 	public function creation($inputs){
 		try {
 			$sql = "INSERT INTO utilisateurs (Nom, Prenom, Centre, Promotion, Identifiant, id_Roles) 
-					VALUES (:Nom, :Prenom, :Centre, :Promotion, :email, :id_R);";
+					VALUES (:Nom, :Prenom, :Centre, :Promotion, :email, :id_R);INSERT INTO wish_list (id_Utilisateurs) SELECT MAX(id) FROM utilisateurs;";
 			$stmt = $this->parent->prepare($sql);
 			$id=array_shift($inputs); //si id inutile
 			$stmt->execute($inputs);
@@ -41,11 +42,19 @@ class Utilisateurs extends Model{
 	    }
 	}
 
+	
+	public function modification($inputs){
+		try {
+			$sql = "UPDATE utilisateurs SET Nom =:Nom, Prenom=:Prenom, Centre=:Centre, Promotion=:Promotion, Identifiant=:email, id_Roles=:id_R WHERE id=:ID";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute($inputs);
+			return ['success',"L'utilisateur ".$inputs["Nom"]." ".$inputs['Prenom'].", email = ".$inputs['email']." | ID = ".$inputs['ID']." a été modifé avec succès !"];
 
-
-	public function getIdbyRole($param){
-		$role = $this->parent->role->getIDbyArg($param);
-		return $role;
+		}
+	    catch(PDOException $e) {
+	    	//echo $sql . "<br>" . $e->getMessage();
+	    	return ['warning',"L'utilisateur ".$inputs["Nom"]." ".$inputs['Prenom']." n'a pas pu être modifé."];
+	    }
 	}
 
 
@@ -65,9 +74,9 @@ class Utilisateurs extends Model{
 
 	public function getIDbyArg($args){
 		try {
-			$sql = "SELECT id FROM utilisateurs WHERE Nom=:Nom AND Prenom=:Prenom";
+			$sql = "SELECT id FROM utilisateurs WHERE Identifiant = :email";
 			$stmt = $this->parent->prepare($sql);
-			$stmt->execute(['Nom'=>$args[0], 'Prenom'=>$args[1]]);
+			$stmt->execute(['email'=>$args]);
 			$q=$stmt->fetch();
 			return $q;
 
@@ -76,57 +85,77 @@ class Utilisateurs extends Model{
 	    	echo $sql . "<br>" . $e->getMessage();
 	    }		
 	}
-/*
-	// récupere tous les users
-	function getAllUsers() {
-		$con = getDatabaseConnexion();
-		$requete = 'SELECT * from utilisateurs';
-		$rows = $con->query($requete);
-		foreach($rows as $row){
-		    echo $row[1].' '.$row[2];
-		};
-	}
 
-	//recupere un user
-	function readUser($id) {
-		$con = getDatabaseConnexion();
-		$requete = "SELECT * from utilisateurs where id = '$id' ";
-		$stmt = $con->query($requete);
-		$row = $stmt->fetchAll();
-		if (!empty($row)) {
-			return $row[0];
-		}
-		
-	}
-
-	//met à jour le user
-	function updateUser($id, $nom, $prenom, $age, $adresse) {
+	public function getID($id){
 		try {
-			$con = getDatabaseConnexion();
-			$requete = "UPDATE utilisateurs set 
-						nom = '$nom',
-						prenom = '$prenom',
-						age = '$age',
-						adresse = '$adresse' 
-						where id = '$id' ";
-			$stmt = $con->query($requete);
+			$sql = "SELECT k.id as Id, k.Nom as Nom, k.Prenom as Prenom, k.Centre as Centre, k.Promo as Promo, k.Identifiant as Identifiant, k.Role as Role from (SELECT utilisateurs.id as id, utilisateurs.Nom as Nom, utilisateurs.Prenom as Prenom, utilisateurs.Centre as Centre, utilisateurs.Promotion as Promo, utilisateurs.Identifiant as Identifiant, utilisateurs.id_Roles as id_role, roles.Type as Role FROM utilisateurs INNER JOIN roles where utilisateurs.id_Roles=roles.id)as K where id=:id;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['id'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getName($id){
+		try {
+			$sql = "SELECT k.id as Id, k.Nom as Nom, k.Prenom as Prenom, k.Centre as Centre, k.Promo as Promo, k.Identifiant as Identifiant, k.Role as Role from (SELECT utilisateurs.id as id, utilisateurs.Nom as Nom, utilisateurs.Prenom as Prenom, utilisateurs.Centre as Centre, utilisateurs.Promotion as Promo, utilisateurs.Identifiant as Identifiant, utilisateurs.id_Roles as id_role, roles.Type as Role FROM utilisateurs INNER JOIN roles where utilisateurs.id_Roles=roles.id)as K where Nom=:nom;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['nom'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getPromo($id){
+		try {
+			$sql = "SELECT k.id as Id, k.Nom as Nom, k.Prenom as Prenom, k.Centre as Centre, k.Promo as Promo, k.Identifiant as Identifiant, k.Role as Role from (SELECT utilisateurs.id as id, utilisateurs.Nom as Nom, utilisateurs.Prenom as Prenom, utilisateurs.Centre as Centre, utilisateurs.Promotion as Promo, utilisateurs.Identifiant as Identifiant, utilisateurs.id_Roles as id_role, roles.Type as Role FROM utilisateurs INNER JOIN roles where utilisateurs.id_Roles=roles.id)as K where Promo=:promo;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['promo'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getCentre($id){
+		try {
+			$sql = "SELECT k.id as Id, k.Nom as Nom, k.Prenom as Prenom, k.Centre as Centre, k.Promo as Promo, k.Identifiant as Identifiant, k.Role as Role from (SELECT utilisateurs.id as id, utilisateurs.Nom as Nom, utilisateurs.Prenom as Prenom, utilisateurs.Centre as Centre, utilisateurs.Promotion as Promo, utilisateurs.Identifiant as Identifiant, utilisateurs.id_Roles as id_role, roles.Type as Role FROM utilisateurs INNER JOIN roles where utilisateurs.id_Roles=roles.id)as K where Centre=:centre;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['centre'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getIdentifiant($id){
+		try {
+			$sql = "SELECT k.id as Id, k.Nom as Nom, k.Prenom as Prenom, k.Centre as Centre, k.Promo as Promo, k.Identifiant as Identifiant, k.Role as Role from (SELECT utilisateurs.id as id, utilisateurs.Nom as Nom, utilisateurs.Prenom as Prenom, utilisateurs.Centre as Centre, utilisateurs.Promotion as Promo, utilisateurs.Identifiant as Identifiant, utilisateurs.id_Roles as id_role, roles.Type as Role FROM utilisateurs INNER JOIN roles where utilisateurs.id_Roles=roles.id)as K where Identifiant=:mail;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['mail'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
 		}
 	    catch(PDOException $e) {
 	    	echo $sql . "<br>" . $e->getMessage();
 	    }
 	}
 
-	// suprime un user
-	function deleteUser($id) {
-		try {
-			$con = getDatabaseConnexion();
-			$requete = "DELETE from utilisateurs where id = '$id' ";
-			$stmt = $con->query($requete);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}*/
 }
 
 

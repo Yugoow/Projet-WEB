@@ -1,5 +1,6 @@
 <?php
 namespace core;
+
 class Gestion extends Controller{
     protected $head;
     private $data;
@@ -7,6 +8,8 @@ class Gestion extends Controller{
     private Offres $offre;
     private Entreprises $entreprise;
     private Controller $parent;
+    private Roles $role_cl;
+    private Contenir $contenir;
     protected $inputs;
 
     function __construct(Controller $parent){
@@ -16,10 +19,19 @@ class Gestion extends Controller{
         $this->user = new Utilisateurs($this->parent->db);
         $this->offre = new Offres($this->parent->db);
         $this->entreprise = new Entreprises($this->parent->db);
+        $this->role_cl = new Roles($this->parent->db);
+        $this->wlist = new Wish_list($this->parent->db);
+        $this->contenir = new Contenir($this->parent->db);
     }
 
     protected function generateGestion(){
-        
+        if($_SESSION['id_Roles']==3 || $_SESSION['id_Roles']==4){
+            header('HTTP/1.0 403 Forbidden');
+            return false;
+
+        }
+
+
     	$listCat = array('user','offre','entreprise');
 
     	foreach($listCat as $cat){
@@ -71,7 +83,7 @@ class Gestion extends Controller{
             $this->getInput($tab);
             try{
                 $role = array_pop($this->inputs);
-                $r_id = $this->user->getIDbyRole($role);
+                $r_id = $this->role_cl->getIDbyArg($role);
                 if(isset($r_id['id'])){
                     $this->inputs["id_R"]=$r_id['id'];
                 }
@@ -84,15 +96,35 @@ class Gestion extends Controller{
         else if($action=="suppression"){
             $tab=['ID', 'Nom', 'Prenom','Promotion'];
             $mdp_temp = null;
-            //$this->getInput($tab, 'id_R',4); CHNAGER CHANGER §§§§§
+            $this->getInput($tab);
 
             $user_del = $this->$inCat->getbyID($this->inputs['ID']);
             $email_temp =$user_del['Identifiant'];
             $this->inputs = array_replace($this->inputs, $user_del);
+            $this->wlist->$action($this->inputs['ID']);
+        }
+        else if($action=="modification"){
+            $tab=['ID', 'Nom', 'Prenom', 'Centre', 'Promotion', 'email', 'Role'];
+
+            $mdp_temp = htmlspecialchars($_POST['mdp']);
+            $email_temp =htmlspecialchars($_POST['email']);
+            $this->getInput($tab);
+            try{
+                $role = array_pop($this->inputs);
+                $r_id = $this->role_cl->getIDbyArg($role);
+                if(isset($r_id['id'])){
+                    $this->inputs["id_R"]=$r_id['id'];
+                }
+            }
+            catch(Exeption $e){
+                $this->data = ["warning", "Erreur"];
+            }
+            //$user_del = $this->$inCat->getbyID($this->inputs['ID']);
+
         }
 
 
-        if(isset($email_temp)){
+        if(isset($email_temp) && ($action!="modification" || ($action=="modification" && !empty($mdp_temp)))){
             $this->gest_user($mdp_temp, $email_temp);
         }
 
@@ -109,6 +141,7 @@ class Gestion extends Controller{
                 $e_id =$this->entreprise->getIDbyarg($name);
                 if(isset($e_id['id'])){
                     $this->inputs["id_E"]=$e_id['id'];
+                    $this->inputs['name']=$name;
                 }
             }
             catch(Exeption $e){
@@ -118,6 +151,8 @@ class Gestion extends Controller{
         else if($action=="suppression"){
             $tab=["ID", "Promotion"];
             $this->getInput($tab);
+            $this->contenir->suppression($this->inputs['ID']);
+
         }
 
     }

@@ -30,18 +30,18 @@
 		<div class="tab-pane fade show active" id="utilisateur" role="tabpanel" aria-labelledby="utilisateur-tab">
 			<form id="bloc-utilisateur" class="container" method="POST" action="">
 
-				{{ form.radiobox('user',["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
+				{{ form.radiobox('user',["Creation", "Suppression", "Modification"], ["creation", "suppression", "modification"])}}
 
 				<section id="input-bloc-user">
 					<div class="row">
 
 						{{ form.input('input_id',"ID","ID", "Identifiant",'number',"form_s","style=display:none", "min=1")}}
 
-						{{ form.input('input_last',"Nom", "Nom", "Nom")}}
+						{{ form.input('input_last',"Nom", "Nom", "Nom", 'text', 'form_nos')}}
 
-						{{ form.input('input_firstn',"Prénom", "Prenom", "Prénom")}}
+						{{ form.input('input_firstn',"Prénom", "Prenom", "Prénom", 'text', 'form_nos')}}
 
-						{{ form.select('promotion_selec',"Promotion", ["A1","A2","A3","A4","A5"])}}
+						{{ form.select('promotion_selec',"Promotion", ["A1","A2","A3","A4","A5"],["A1","A2","A3","A4","A5"])}}
 
 					</div>
 
@@ -49,12 +49,12 @@
 
 						{{ form.input('input_centre',"Centre","Centre","Centre",'text',"form_nos")}}
 
-						{{ form.select('role_selec',"Role", ["Étudiant","Délégué","Tuteur","Administrateur"], "Personnaliser les droits (délégués)", 'form_nos')}}
+						{{ form.select('role_selec',"Role",["Étudiant","Délégué","Tuteur","Administrateur"],["Etudiant","Delegue","Tuteur","Administrateur"], "Personnaliser les droits (délégués)", 'form_nos')}}
 					</div>
 
 					<div class="form-group form_nos">
 						<label for="input_email">Adresse email</label>
-						<input type="email" class="form-control" id="input_email" placeholder="nom@example.com" value="test@mail.com" name="email" required>
+						<input type="email" class="form-control form_nos" id="input_email" placeholder="nom@example.com" value="test@mail.com" name="email">
 					</div>
 
 					<div class="form-group form_nos">
@@ -62,7 +62,7 @@
 						<input type="password" class="form-control form_nos" id="input_mdp" placeholder="8 charactères minimum" pattern=".{8,30}" name="mdp">
 						<div class="d-flex justify-content-center align-items-center p-1">
 							<label for="mdp_rng">Taille</label>
-							<input type="range" class="ml-2 mr-2" id="mdp_rng" value ="8" max="30" min="8" step="1" required>
+							<input type="range" class="ml-2 mr-2" id="mdp_rng" value ="8" max="30" min="8" step="1">
 							<input type="number" id="input_size" value="8" style="width:50px;">
 						</div>
 						<div class="d-flex justify-content-center">
@@ -104,18 +104,18 @@
 		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 			<form id="bloc_offre" class="container" method="POST" action="">
 
-				{{ form.radiobox('offre' ,["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
+				{{ form.radiobox('offre' ,["Creation", "Suppression", "Modification"], ["creation", "suppression", "modification"])}}
 
 				<section id="input-bloc-offre">
 					<div class="row">
 
 						{{ form.input('input_id_o',"ID","ID", "Identifiant",'text',"form_s","style=display:none", "min=1")}}
 
-						{{ form.input('input_titreoffre',"Titre","Titre","Entrez un titre", 'text', 'form_nos')}}
+						{{ form.input('input_titreoffre',"Titre","Titre","Entrez un titre")}}
 
 						{{ form.input('input_entreprise',"Entreprise","Entreprise","Nom entreprise")}}
 
-						{{ form.select('promotion_selec_o',"Promotion", ["A1","A2","A3","A4","A5"])}}
+						{{ form.select('promotion_selec_o',"Promotion", ["A1","A2","A3","A4","A5"],["A1","A2","A3","A4","A5"])}}
 
 						{{ form.input('input_placetot',"Places","Places","Places", 'number', 'form_nos', '', 'min=1')}}
 
@@ -124,7 +124,29 @@
 					<div class="row">
 						{{ form.input('input_datestart',"Date de début de stage","Date","Date", "date", "form_nos")}}
 						
-						{{ form.input('duree_rng',"Durée du stage","Duree","Duree","range","form_nos")}}
+						<div class="form-group col-lg col-md form_nos">
+							<p>Duree</p>
+							<div class="d-flex flew-wrap align-items-end">
+								<div class="form-check">
+									<input class="form-check-input" value="10 semaines" id="optiond_1" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_1">10 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="15 semaines" id="optiond_2" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_2">15 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="16 semaines" id="optiond_3" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_3">16 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="24 semaines" id="optiond_4" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_4">24 semaines</label>
+								</div>
+							</div>
+
+						</div>
+
 
 						{{ form.input('input_competences',"Compétences","Competences","Competences", 'textarea',"form_nos")}}
 
@@ -167,7 +189,7 @@
 		<div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
 			<form id="bloc_entreprise" class="container" method="POST" action="">
 
-				{{ form.radiobox('entreprise',["Creation", "Suppression", "Modification", "Autre"], ["creation", "suppression", "modification", "autre"])}}
+				{{ form.radiobox('entreprise',["Creation", "Suppression", "Modification"], ["creation", "suppression", "modification"])}}
 
 				<section id="input-bloc-entreprise">
 					<div class="row">

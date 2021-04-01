@@ -1,5 +1,31 @@
 $(document).ready(function()
 {
+
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker
+			.register('../../sw.js')
+			.then(registration => {
+				console.log(
+					`Service Worker enregistré ! Ressource: ${registration.scope}`
+				);
+			})
+			.catch(err => {
+				console.log(
+				`Echec de l'enregistrement du Service Worker: ${err}`
+				);
+			});
+		});
+	}
+/*OFFRE GESTION AFFICHAGE*/
+	if ($('#titre_offre').text() == "")
+	{
+		$('#offre_stage').css({'display': 'none'});
+	} else
+	{
+		$('#offre_stage').css({'display': 'block'});
+	}	
+
 	$('#input_mdp').prop('required', true);
 /*GESTION DU MENU ET DE LA RECHERCHE (APPARITION)*/
 	/*MENU*/
@@ -18,6 +44,7 @@ $(document).ready(function()
 		$('#search_ic3').css({'display': 'none'});
 	});
 
+
 /*FILTRES GLOBAUX DE RECHERCHE*/
 	$('#search_f .custom-control-input').on('click',function(){
 		if( $('#search_f .custom-control-input:checked').val()=='opt4'){
@@ -34,6 +61,8 @@ $(document).ready(function()
 			$('.extra-s').slideUp();
 		}
 	});
+
+
 
 
 
@@ -62,6 +91,7 @@ $(document).ready(function()
 	$('.custom-radio input').on('click', function(){
 		var parent = $('#'+$(this).attr('id')).attr('id').split('_')[0];
 		if($(this).val()=="creation"){
+			$('#input_email').prop('readonly', false);
 			$('#input-bloc-'+parent+' .form_s').hide();
 			$('#input-bloc-'+parent+' .form_nos').show();
 		}
@@ -70,6 +100,7 @@ $(document).ready(function()
 			$('#input-bloc-'+parent+' .form_nos').hide();
 		}
 		else if($(this).val()=="modification"){
+			$('#input_email').prop('readonly', true);
 			$('#input-bloc-'+parent+' .form_s').show();
 			$('#input-bloc-'+parent+' .form_nos').show();
 		}
@@ -108,17 +139,25 @@ $(document).ready(function()
 	/*Message suppression modification etc*/
 	$('#valid_btn').on('click', function(){
 		var nom =$('#input_last').val();
+		var id =$('#input_id').val();
 		var prenom = $('#input_firstn').val();
 		var act = $('.action_user:checked').val();
 		if(act=="suppression"){
-			$('#input_mdp').prop('required', false);
+			$('.form_s').prop('required', true);
+			$('.form_nos').prop('required', false);
 		}
 		else if (act=="creation"){
-			$('#input_mdp').prop('required', true);		
+			$('.form_s').prop('required', false);
+			$('.form_nos').prop('required', true);		
+		}
+		else if(act=="modification"){
+			$('.form_s').prop('required', true);
+			$('.form_nos').prop('required', true);
+			$('#input_mdp').prop('required', false);
 		}
 
-		if(nom && prenom){
-			$('#p_modal').text("Voulez vous vraiment effectuer une "+ act+" d'utilisateur :"+nom+' '+prenom);
+		if((nom && prenom) || id){
+			$('#p_modal').text("Voulez vous vraiment effectuer une "+ act+" d'utilisateur : \n"+nom+' '+prenom);
 			$('#validation_Label').text(act).css('text-transform','capitalize');
 
 		}
@@ -133,7 +172,7 @@ $(document).ready(function()
 		var act = $('.action_offre:checked').val();
 
 		if(offre){
-			$('#p_modal1').text("Voulez vous vraiment effectuer une "+ act+" d'offre :"+offre);
+			$('#p_modal1').text("Voulez vous vraiment effectuer une "+ act+" d'offre : \n"+offre);
 			$('#validation_Label1').text(act).css('text-transform','capitalize');
 		}
 		else{
@@ -147,7 +186,7 @@ $(document).ready(function()
 		var act = $('.action_entreprise:checked').val();
 
 		if(entreprise){
-			$('#p_modal2').text("Voulez vous vraiment effectuer une "+ act+" d'entreprise :"+entreprise);
+			$('#p_modal2').text("Voulez vous vraiment effectuer une "+ act+" d'entreprise : \n"+entreprise);
 			$('#validation_Label2').text(act).css('text-transform','capitalize');
 		}
 		else{
@@ -155,6 +194,93 @@ $(document).ready(function()
 			$('#validation_Label2').text(act).css('text-transform','capitalize');
 		}
 	})
+
+
+/*CANDIDATURES*/
+
+	$('.detect').on('click',function(){
+		var id = $(this).prop('id');
+		$('#'+id+' .extra-s').slideToggle();
+	});
+
+
+
+/* LES AJAX*/
+
+/*GESTION MODIFICATION USER*/
+	$('#input_id').on('keyup', function() {
+		var id = $(this).val();
+		$.ajax({
+			type: "POST",
+			dataType:"json",
+			url: "Req_ajax.php",
+			data: { id_modif: id }
+			}).done(function( response ) {
+				$("#input_last").val(""+response.Nom+"");
+				$("#input_firstn").val(""+response.Prenom+"");
+				$("#promotion_selec").val(response.Promotion);
+				$("#input_centre").val(""+response.Centre+"");
+				$("#role_selec").val(""+response.id_Roles+"");
+				$("#input_email").val(""+response.Identifiant+"");
+		});
+	});
+
+
+
+/*AJOUT A LA WISH LIST DEPUIS LE MENU*/
+	$('.not_wish').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_wish: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);
+		});
+	});
+
+/*SUPPRESSION DE LA WLIST*/
+	$('.in_wish').click(function() {
+		var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_del: id }
+			}).done(function( response ) {
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);	
+				$('#wish_alert').html(response);
+		});
+	});
+
+/*AJOUT A LA CANDIDATURE */
+	$('.not_cand').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_cand_add: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);
+		});
+	});
+
+/*SUPRESSION DE LA CANDIDATURE */
+	$('.in_cand').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_cand_del: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('#wish_alert').html(response);
+		});
+	});
 
 });
 

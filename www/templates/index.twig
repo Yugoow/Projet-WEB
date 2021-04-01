@@ -6,44 +6,39 @@
 
 
 {% include	'header.twig'%}
-{{ var }}
 
 	<!--Partie principale, avec les dernières nouveautés et la wish-list-->
+
+<div class="toast" style="position: absolute; top: 0; right: 0;margin : 2rem;">
+	<div class="toast-header">
+		<i class="fas fa-pen-square rounded mr-2" style="color:blue"></i>
+		<strong class="mr-auto">Ajout</strong>
+		<small>Il y a quelques instants</small>
+		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onclick="$('.toast').css('opacity','0');">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="toast-body" id="body_info">
+	</div>
+</div>
 
 <!--Nouveaux stages-->
 <section class="sect-div">
 	<h5>Dernières offres de stage</h5>
 	<div class="disp_offre">
 
-		{{ art.article("nvloffre", '/', 'Stage PARIS',"Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X", "Gestion d'une BDD reliée à des API")}}
+<!--{#
+		{{ art.article("nvloffre", '/', 'Stage PARIS',"Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X", "Gestion d'une BDD reliée à des API")}}  #}-->
 
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage NANCY</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API. BLALALALALALANB AABfBBSDHALZFIHAIFHZIELFGAGBZV</p>
+	{% for item in contenuoffres %}
+		<article class="nvloffre">
+			<h6>{{ item['Titre'] }}<i class="far fa-bookmark not_wish float-right m-1"  id="id_{{item['id']}}"></i></h6>
+			<p>Identifiant : {{ item['id'] }}</p>
+			<p>Competences : {{ item['Competence'] }} | Promotion : {{ item['Type_promo']}} |  Dates : {{ item['Date_offre'] }}</p>
+			<p>Stage de {{ item['Duree'] }} mois pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
+			<p>Rémunéré à {{ item['Remuneration'] }} €/mois<i class="fas fa-file-alt float-right not_cand" id="idcand_{{item['id']}}" style="font-size:1.3rem;"></i></p>
 		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage METZ</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API</p>
-		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage MARSEILLE</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API</p>
-		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage STRASBOURG</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API</p>
-		</article>
-
-		<article class="d-flex justify-content-center align-items-center" onclick="window.location.href = 'connexion.html';">
-			<i style="font-size: 3rem; color:grey; cursor:pointer;" class="fas fa-long-arrow-alt-right"></i>
-		</article>
+	{% endfor %}
 	</div>
 
 </section>
@@ -54,27 +49,18 @@
 	<hr class="phone" style="background:white">
 	<h5>WISH-LIST <i class="far fa-bookmark float-right"></i></h5>
 	<div id="wlist" class="disp_offre">
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage NANCY</h6>
-			<p>Domaine : Informatique	Promotion : BAC+2	Dates :X/X/X - X/X/X</p>
-			<p>Gestion d'une BDD reliéeà des API</p>
+
+	{% for item in contenuwish %}
+		<article class="nvloffre">
+			<h6>{{ item['Titre'] }}<i class="fas fa-trash-alt float-right in_wish m-2" id="trash_{{ item['id'] }}"></i></h6>
+			<p>Identifiant : {{ item['id'] }}</p>
+			<p>Competences : {{ item['Competence'] }} | Promotion : {{ item['Type_promo']}} |  Dates : {{ item['Date_offre'] }}</p>
+			<p>Stage de {{ item['Duree'] }} mois pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
+			<p>Rémunéré à {{ item['Remuneration'] }} €/mois<i class="fas fa-file-alt float-right not_cand" id="idcand_{{item['id']}}" style="font-size:1.3rem;"></i></p>
 		</article>
 
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage REIMS</h6>
-		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage VERDUN</h6>
-		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage BREST</h6>
-		</article>
-
-		<article class="nvloffre" onclick="window.location.href = 'connexion.html';">
-			<h6>Stage DIJON</h6>
-		</article>
+	{% endfor %}
+	
 	</div>
 </section>
 
