@@ -1,7 +1,7 @@
 # Projet-WEB
 Projet WEB
-Attention, les assets [css, vendores, script.js] sont à mettre dans templates (sous le nom de fichier assets)
-![image](https://user-images.githubusercontent.com/56593824/113280314-68009700-92e4-11eb-84d0-619b48733c0a.png)
+<p>Attention, les assets [css, vendores, script.js] sont à mettre dans templates (sous le nom de fichier assets)<br>Architecture des fichiers : </p><br>
+![image](https://user-images.githubusercontent.com/56593824/113280449-967e7200-92e4-11eb-9117-c2196fd81557.png)
 
 <h1>Mock-Up</h1>
 <p>Téléphone accueil : https://wireframe.cc/NAWqXQ <br>
