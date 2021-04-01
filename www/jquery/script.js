@@ -45,32 +45,6 @@ $(document).ready(function()
 	});
 
 
-/*AJOUT A LA WISH LIST DEPUIS LE MENU*/
-	$('.not_wish').click(function() {
-	 	var id = $(this).prop('id').split('_')[1];
-		$.ajax({
-			type: "POST",
-			url: "Req_ajax.php",
-			data: { id_wish: id }
-			}).done(function( response ) {
-				$('.toast').css('opacity','1');
-				$('#body_info').html(response);
-		});
-	});
-
-/*SUPPRESSION DE LA WLIST*/
-	$('.in_wish').click(function() {
-		var id = $(this).prop('id').split('_')[1];
-		$.ajax({
-			type: "POST",
-			url: "Req_ajax.php",
-			data: { id_del: id }
-			}).done(function( response ) {
-				$('#wish_alert').html(response);
-		});
-	});
-
-
 /*FILTRES GLOBAUX DE RECHERCHE*/
 	$('#search_f .custom-control-input').on('click',function(){
 		if( $('#search_f .custom-control-input:checked').val()=='opt4'){
@@ -222,6 +196,16 @@ $(document).ready(function()
 	})
 
 
+/*CANDIDATURES*/
+
+	$('.detect').on('click',function(){
+		var id = $(this).prop('id');
+		$('#'+id+' .extra-s').slideToggle();
+	});
+
+
+
+/* LES AJAX*/
 
 /*GESTION MODIFICATION USER*/
 	$('#input_id').on('keyup', function() {
@@ -241,6 +225,62 @@ $(document).ready(function()
 		});
 	});
 
+
+
+/*AJOUT A LA WISH LIST DEPUIS LE MENU*/
+	$('.not_wish').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_wish: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);
+		});
+	});
+
+/*SUPPRESSION DE LA WLIST*/
+	$('.in_wish').click(function() {
+		var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_del: id }
+			}).done(function( response ) {
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);	
+				$('#wish_alert').html(response);
+		});
+	});
+
+/*AJOUT A LA CANDIDATURE */
+	$('.not_cand').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_cand_add: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('.toast').css('opacity','1');
+				$('#body_info').html(response);
+		});
+	});
+
+/*SUPRESSION DE LA CANDIDATURE */
+	$('.in_cand').click(function() {
+	 	var id = $(this).prop('id').split('_')[1];
+		$.ajax({
+			type: "POST",
+			url: "Req_ajax.php",
+			data: { id_cand_del: id }
+			}).done(function( response ) {
+				console.log(response);
+				$('#wish_alert').html(response);
+		});
+	});
 
 });
 
