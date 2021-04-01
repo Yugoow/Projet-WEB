@@ -67,7 +67,10 @@ class Controller{
 		        $offre = new Offre($this);
 		        $offre->generateOffre();
 		        break;
-
+		    case 'utilisateur':
+                $utilisateur = new Utilisateur($this);
+                $utilisateur->generateUtilisateur();
+                break;
 		    // A SUPPRIMER
 		    case 'test':
 		        echo $this->twig->render('test.twig', ['title'=>"toi"]);
