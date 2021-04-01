@@ -43,8 +43,18 @@ class Utilisateurs extends Model{
 	}
 
 	
-	public function modification(){
+	public function modification($inputs){
+		try {
+			$sql = "UPDATE utilisateurs SET Nom =:Nom, Prenom=:Prenom, Centre=:Centre, Promotion=:Promotion, Identifiant=:email, id_Roles=:id_R WHERE id=:ID";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute($inputs);
+			return ['success',"L'utilisateur ".$inputs["Nom"]." ".$inputs['Prenom'].", email = ".$inputs['email']." | ID = ".$inputs['ID']." a été modifé avec succès !"];
 
+		}
+	    catch(PDOException $e) {
+	    	//echo $sql . "<br>" . $e->getMessage();
+	    	return ['warning',"L'utilisateur ".$inputs["Nom"]." ".$inputs['Prenom']." n'a pas pu être modifé."];
+	    }
 	}
 
 
@@ -145,26 +155,7 @@ class Utilisateurs extends Model{
 	    	echo $sql . "<br>" . $e->getMessage();
 	    }
 	}
-/*
 
-
-	//met à jour le user
-	function updateUser($id, $nom, $prenom, $age, $adresse) {
-		try {
-			$con = getDatabaseConnexion();
-			$requete = "UPDATE utilisateurs set 
-						nom = '$nom',
-						prenom = '$prenom',
-						age = '$age',
-						adresse = '$adresse' 
-						where id = '$id' ";
-			$stmt = $con->query($requete);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}
-*/
 }
 
 
