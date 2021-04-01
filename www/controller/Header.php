@@ -11,7 +11,6 @@ class Header extends Controller {
 			1=>array('nom' => 'Accueil', 'url' => '/'),
 			2=>array('nom' => 'Offres', 'url' => '?p=offre'),
 			5=>array('nom' => 'Entreprises', 'url' => '?p=entreprise'),
-			6=>array('nom' => 'WISH-LIST', 'url' => '?p=wishlist'),
 			7=>array('nom' => 'Candidature', 'url' => '?p=candidature'),
 			8=>array('nom' => 'Compte', 'url' => '?p=compte'),
 			9=>array('nom' => 'Deconnexion', 'url' => 'deconnexion.php',  'id'=>'id=discret'));
@@ -26,6 +25,7 @@ class Header extends Controller {
 				$this->menu = $this->default_menu;
 				$this->menu[3]= array('nom'=>'Gestion', 'url'=>'?p=gestion');
 				$this->menu[4]= array('nom' => 'Utilisateurs', 'url' => '?p=utilisateur');
+				$this->menu[6]= array('nom' => 'WISH-LIST', 'url' => '?p=wishlist');
 				ksort($this->menu);
 				break;
 
@@ -37,10 +37,14 @@ class Header extends Controller {
 
 			case 3:
 				$this->menu = $this->default_menu;
+				$this->menu[6]= array('nom' => 'WISH-LIST', 'url' => '?p=wishlist');
+				ksort($this->menu);
 				break;
 
 			case 4:
 				$this->menu = $this->default_menu;
+				$this->menu[6]= array('nom' => 'WISH-LIST', 'url' => '?p=wishlist');
+				ksort($this->menu);
 				break;
 			default:
 				$denied=true;

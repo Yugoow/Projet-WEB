@@ -25,7 +25,7 @@ class Gestion extends Controller{
     }
 
     protected function generateGestion(){
-        if($_SESSION['id_Roles']!=1){
+        if($_SESSION['id_Roles']==3 || $_SESSION['id_Roles']==4){
             header('HTTP/1.0 403 Forbidden');
             return false;
 
@@ -109,6 +109,16 @@ class Gestion extends Controller{
             $mdp_temp = htmlspecialchars($_POST['mdp']);
             $email_temp =htmlspecialchars($_POST['email']);
             $this->getInput($tab);
+            try{
+                $role = array_pop($this->inputs);
+                $r_id = $this->role_cl->getIDbyArg($role);
+                if(isset($r_id['id'])){
+                    $this->inputs["id_R"]=$r_id['id'];
+                }
+            }
+            catch(Exeption $e){
+                $this->data = ["warning", "Erreur"];
+            }
             //$user_del = $this->$inCat->getbyID($this->inputs['ID']);
 
         }
