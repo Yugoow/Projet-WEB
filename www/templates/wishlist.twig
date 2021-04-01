@@ -27,7 +27,7 @@
 				<p>Identifiant : {{ item['id'] }}</p>
 				<p>Competences : {{ item['Competence'] }} | Promotion : {{ item['Type_promo']}} |  Dates : {{ item['Date_offre'] }}</p>
 				<p>Stage de {{ item['Duree'] }} mois pour {{ item['Nombre_places']}} étudiant(s) à {{ item['Entreprise'] }}</p>
-				<p>Rémunéré à {{ item['Remuneration'] }} €/mois</p>
+				<p>Rémunéré à {{ item['Remuneration'] }} €/mois<i class="fas fa-file-alt float-right not_cand" id="idcand_{{item['id']}}" style="font-size:1.3rem;"></i></p>
 			</article>
 
 		{% endfor %}

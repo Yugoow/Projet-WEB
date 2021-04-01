@@ -124,7 +124,29 @@
 					<div class="row">
 						{{ form.input('input_datestart',"Date de début de stage","Date","Date", "date", "form_nos")}}
 						
-						{{ form.input('duree_rng',"Durée du stage","Duree","Duree","range","form_nos")}}
+						<div class="form-group col-lg col-md form_nos">
+							<p>Duree</p>
+							<div class="d-flex flew-wrap align-items-end">
+								<div class="form-check">
+									<input class="form-check-input" value="10 semaines" id="optiond_1" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_1">10 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="15 semaines" id="optiond_2" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_2">15 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="16 semaines" id="optiond_3" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_3">16 semaines</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="24 semaines" id="optiond_4" type="checkbox" name="opt2">
+									<label class="form-check-label" for="optiond_4">24 semaines</label>
+								</div>
+							</div>
+
+						</div>
+
 
 						{{ form.input('input_competences',"Compétences","Competences","Competences", 'textarea',"form_nos")}}
 
