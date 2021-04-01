@@ -11,25 +11,11 @@ class Wish_list extends Model{
 	}
 
 
-
-	public function ajout($param){
-		try {
-			$sql = "INSERT INTO wish_list (id_Utilisatuers) 
-					VALUES (:id_user);";
-			$stmt = $this->parent->prepare($sql);
-			$stmt->execute(['id_user'=>$param]);
-
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}
-
 	public function suppression($inputs){
 		try {
-			$sql = "DELETE FROM container WHERE id=(SELECT id FROM wish_list WHERE id_Utilisateurs=:ID);DELETE FROM wish_list WHERE id_Utilisateurs=:ID";
+			$sql = "DELETE FROM contenir WHERE id=(SELECT id FROM wish_list WHERE id_Utilisateurs=:ID);DELETE FROM wish_list WHERE id_Utilisateurs=:ID";
 			$stmt = $this->parent->prepare($sql);
-			$stmt->execute(['ID'=>$inputs['ID']]);
+			$stmt->execute(['ID'=>$inputs]);
 
 		}
 	    catch(PDOException $e) {

@@ -17,8 +17,9 @@ class Offres extends Model{
 					VALUES (:Competences, :Promotion, :Duree, :gratif, :Date, :Places, :id_E, :Titre);";
 			$stmt = $this->parent->prepare($sql);
 			$id=array_shift($inputs); //si id inutile
+			$name = array_pop($inputs);
 			$stmt->execute($inputs);
-			return ['success',"L'offre de ".$inputs["id_E"]." ".$inputs["Titre"]." a été créée avec succès !"];
+			return ['success',"L'offre de ".$name." ".$inputs["Titre"]." a été créée avec succès !"];
 
 		}
 	    catch(PDOException $e) {
@@ -57,12 +58,56 @@ class Offres extends Model{
 	}
 
 
-	public function getbyID($id){
+public function getbyID($id){
 		try {
-			$sql = "SELECT k.id, k.Competence, k.Promo, k.Duree, k.Remuneration, k.Date_offre, k.Nombre_place, k.Nom, k.Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where id=:id;";
+			$sql = "SELECT k.id as id, k.Competence as Competence, k.Promo as Promo, k.Duree as Duree, k.Remuneration as Remuneration, k.Date_offre as Date_offre, k.Nombre_place as Nombre_place, k.Nom as Nom, k.Titre as Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where id=:id;";
 			$stmt = $this->parent->prepare($sql);
 			$stmt->execute(['id'=>$id]);
-			$q=$stmt->fetch();
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getName($id){
+		try {
+			$sql = "SELECT k.id as id, k.Competence as Competence, k.Promo as Promo, k.Duree as Duree, k.Remuneration as Remuneration, k.Date_offre as Date_offre, k.Nombre_place as Nombre_place, k.Nom as Nom, k.Titre as Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where Titre=:titre;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['titre'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getPromo($id){
+		try {
+			$sql = "SELECT k.id as id, k.Competence as Competence, k.Promo as Promo, k.Duree as Duree, k.Remuneration as Remuneration, k.Date_offre as Date_offre, k.Nombre_place as Nombre_place, k.Nom as Nom, k.Titre as Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where Promo=:promo;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['promo'=>$id]);
+			$q=$stmt->fetchAll();
+			return $q;
+			
+			
+
+		}
+	    catch(PDOException $e) {
+	    	echo $sql . "<br>" . $e->getMessage();
+	    }
+	}
+	
+	public function getDuree($id){
+		try {
+			$sql = "SELECT k.id as id, k.Competence as Competence, k.Promo as Promo, k.Duree as Duree, k.Remuneration as Remuneration, k.Date_offre as Date_offre, k.Nombre_place as Nombre_place, k.Nom as Nom, k.Titre as Titre from (SELECT offres.id as id, offres.Competence as Competence, offres.Type_Promo as Promo, offres.Duree as Duree, offres.Remuneration as Remuneration, offres.Date_offre as Date_offre, offres.Nombre_places as Nombre_place, entreprises.Nom as Nom, offres.Titre as Titre FROM entreprises INNER JOIN offres where offres.id_Entreprises=entreprises.id)as K where Duree=:duree;";
+			$stmt = $this->parent->prepare($sql);
+			$stmt->execute(['duree'=>$id]);
+			$q=$stmt->fetchAll();
 			return $q;
 
 		}

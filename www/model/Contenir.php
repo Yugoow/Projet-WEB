@@ -16,7 +16,7 @@ class Contenir extends Model{
 			$sql = "INSERT INTO contenir (id, id_Offres) 
 					VALUES (:id_wlist, :id);";
 			$stmt = $this->parent->prepare($sql);
-			$stmt->execute($param);
+			$stmt->execute(['id_wlist'=>$param['id_wlist'], 'id'=>$param['id']]);
 			return true;
 
 		}
@@ -31,7 +31,7 @@ class Contenir extends Model{
 		try {
 			$sql = "DELETE FROM contenir WHERE id_Offres=:id";
 			$stmt = $this->parent->prepare($sql);
-			$stmt->execute($param);
+			$stmt->execute(['id'=>$param]);
 			return true;
 
 
@@ -41,8 +41,6 @@ class Contenir extends Model{
 	    	return false;
 	    }
 	}
-
-
 
 
 }
